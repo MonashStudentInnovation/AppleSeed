@@ -1,8 +1,9 @@
 # Spring boot GAE project for Java 8
 
-Test project used to test Spring boot on AppEngine standard with Java 8. See  [Trello Board](https://trello.com/b/R4VCZVW9/spring-boot-gae). 
+Spring boot on AppEngine standard with Java 8.
 
-## Running
+
+## Developing
 
 Currently just running locally through terminal only
 
@@ -10,7 +11,7 @@ Currently just running locally through terminal only
 mvn appengine:devserver
 ```
 
-Didn't seem to work with the IntelliJ runner. A TODO task.
+**NOTE:** This currently does **not** work using the IntellIJ IDEA debugger.
 
 ## Proofs
 
