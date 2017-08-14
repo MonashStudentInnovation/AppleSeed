@@ -11,7 +11,6 @@ import java.util.UUID;
 @Entity
 public class Unit {
 
-
     @Id
     private String id;
 

@@ -64,34 +64,35 @@ public class David {
     private String id;
 
     @Index
-    private String FullName;
+    private String fullName;
 
     private List<String> memes;
-
-    public String getId() {
+    
+    public String getId(){
         return id;
     }
-
-    public void setId(String id) {
+    
+    public String setId(String id){
         this.id = id;
     }
-
-    public String getIndexedThing() {
-        return indexedThing;
+    
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setIndexedThing(String indexedThing) {
-        this.indexedThing = indexedThing;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public List<String> getSearchIndexedThing() {
-        return searchIndexedThing;
+    public List<String> getMemes() {
+        return memes;
     }
 
-    public void List<String>(List<String> searchIndexedThing) {
-        this.searchIndexedThing = searchIndexedThing;
+    public void setMemes(List<String> memes) {
+        this.memes = memes;
     }
-
+    
+    
     
     public void init() {
         // Protects us from accidentally re-initialising an object that's retrieved from db
