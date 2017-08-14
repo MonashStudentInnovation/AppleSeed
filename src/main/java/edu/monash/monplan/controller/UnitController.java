@@ -4,6 +4,8 @@ import edu.monash.monplan.model.Unit;
 import edu.monash.monplan.service.UnitService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 
 @RestController
 @RequestMapping("/unit")
@@ -22,7 +24,7 @@ public class UnitController {
 
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    void insertNewUnit(Unit unit){
-        unitService.addUnit(unit);
+    Unit insertNewUnit(@RequestBody Unit unit){
+        return unitService.addUnit(unit);
     }
 }
