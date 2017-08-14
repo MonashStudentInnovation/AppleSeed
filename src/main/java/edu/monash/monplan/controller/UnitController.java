@@ -1,26 +1,28 @@
-package hello.controller;
+package edu.monash.monplan.controller;
 
-import hello.controller.request.MessageTaskRequest;
-import hello.model.Unit;
-import hello.service.UnitService;
-import org.springframework.beans.factory.annotation.Autowired;
+import edu.monash.monplan.model.Unit;
+import edu.monash.monplan.service.UnitService;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 
 @RestController
+@RequestMapping("/unit")
 public class UnitController {
-
 
     private final UnitService unitService;
 
-    @Autowired
     public UnitController(UnitService unitService){
         this.unitService = unitService;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/unit/{unitCode}")
+    @RequestMapping(path = "", method = RequestMethod.GET)
     Unit getUnitByUnitCode(@PathVariable String unitCode){
         return unitService.getByUnitCode(unitCode);
+    }
+
+
+    @RequestMapping(path = "", method = RequestMethod.POST)
+    void insertNewUnit(Unit unit){
+        unitService.addUnit(unit);
     }
 }

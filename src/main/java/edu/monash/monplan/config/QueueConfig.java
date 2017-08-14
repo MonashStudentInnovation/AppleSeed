@@ -1,4 +1,4 @@
-package hello.config;
+package edu.monash.monplan.config;
 
 import com.google.appengine.api.taskqueue.Queue;
 import com.google.appengine.api.taskqueue.QueueFactory;

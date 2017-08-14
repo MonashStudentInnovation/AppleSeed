@@ -1,4 +1,4 @@
-package hello.service;
+package edu.monash.monplan.service;
 
 import com.google.appengine.api.taskqueue.Queue;
 import com.google.appengine.api.taskqueue.TaskHandle;

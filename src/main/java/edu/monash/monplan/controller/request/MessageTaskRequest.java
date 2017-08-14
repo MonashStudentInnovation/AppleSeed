@@ -1,4 +1,4 @@
-package hello.controller.request;
+package edu.monash.monplan.controller.request;
 
 import org.hibernate.validator.constraints.NotBlank;
 

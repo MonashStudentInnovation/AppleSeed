@@ -1,7 +1,8 @@
-package hello.config;
+package edu.monash.monplan.config;
 
 import com.googlecode.objectify.ObjectifyService;
-import hello.model.Diesel;
+import edu.monash.monplan.model.Unit;
+import edu.monash.monplan.model.Diesel;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
@@ -17,6 +18,7 @@ public class ObjectifyConfig {
 
     private void registerObjectifyEntities() {
         register(Diesel.class);
+        register(Unit.class);
     }
 
 

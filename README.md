@@ -1,5 +1,4 @@
-# Spring boot GAE project for Java 8
-
+# monPlan API Java 1.8
 Spring boot on AppEngine standard with Java 8.
 
 
@@ -9,6 +8,11 @@ Currently just running locally through terminal only
 
 ```
 mvn appengine:devserver
+```
+
+You should also clean the package after fixing errors
+```
+mvn clean package
 ```
 
 **NOTE:** This currently does **not** work using the IntellIJ IDEA debugger.

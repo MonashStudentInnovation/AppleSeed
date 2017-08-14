@@ -1,4 +1,4 @@
-package hello.controller;
+package edu.monash.monplan.controller;
 
 import com.threewks.gaetools.logger.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;

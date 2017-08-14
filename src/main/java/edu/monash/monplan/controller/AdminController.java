@@ -1,8 +1,8 @@
-package hello.controller;
+package edu.monash.monplan.controller;
 
 import com.google.common.collect.ImmutableMap;
-import hello.controller.request.MessageTaskRequest;
-import hello.service.TaskService;
+import edu.monash.monplan.controller.request.MessageTaskRequest;
+import edu.monash.monplan.service.TaskService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

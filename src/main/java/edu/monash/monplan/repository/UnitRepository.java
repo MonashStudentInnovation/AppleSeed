@@ -1,12 +1,12 @@
-package hello.repository;
+package edu.monash.monplan.repository;
 
-import com.threewks.gaetools.objectify.repository.LongRepository;
+import com.threewks.gaetools.objectify.repository.UuidRepository;
 import com.threewks.gaetools.search.gae.SearchConfig;
-import hello.model.Unit;
+import edu.monash.monplan.model.Unit;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UnitRepository extends LongRepository<Unit> {
+public class UnitRepository extends UuidRepository<Unit> {
 
     public UnitRepository(SearchConfig searchConfig) {
         super(Unit.class, searchConfig);
