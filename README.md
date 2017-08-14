@@ -48,6 +48,58 @@ private void registerObjectifyEntities() {
 
 So we can wire this up.
 
+#### Making the David.class Model
+```java
+package edu.monash.monplan.model;
+
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
+import com.threewks.gaetools.search.SearchIndex;
+
+@Entity
+public class David {
+
+    @Id
+    private String id;
+
+    @Index
+    private String FullName;
+
+    private List<String> memes;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getIndexedThing() {
+        return indexedThing;
+    }
+
+    public void setIndexedThing(String indexedThing) {
+        this.indexedThing = indexedThing;
+    }
+
+    public List<String> getSearchIndexedThing() {
+        return searchIndexedThing;
+    }
+
+    public void List<String>(List<String> searchIndexedThing) {
+        this.searchIndexedThing = searchIndexedThing;
+    }
+
+    
+    public void init() {
+        // Protects us from accidentally re-initialising an object that's retrieved from db
+        this.setId(UUID.randomUUID().toString());
+    }
+}
+```
+
 ## Proofs
 
 List of concepts proven
