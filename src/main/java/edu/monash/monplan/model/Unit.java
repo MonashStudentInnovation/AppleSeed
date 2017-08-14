@@ -48,7 +48,7 @@ public class Unit {
 
     public void init() {
         // Protects us from accidentally re-initialising an object that's retrieved from db
-        this.id = UUID.randomUUID().toString();
+        this.setId(UUID.randomUUID().toString());
     }
 
 }

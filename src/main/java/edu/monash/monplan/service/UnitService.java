@@ -25,14 +25,10 @@ public class UnitService {
 
     private Unit save(final Unit unit) {
         if (unit.getId() == null){
+            // we initialise a new UUID if we dont have a UUID for the new Unit
             unit.init();
         }
-        return ofy().transact(new Work<Unit>() {
-            @Override
-            public Unit run() {
-                return unitRepository.put(unit);
-            }
-        });
+        return unitRepository.put(unit);
     }
 
 }
