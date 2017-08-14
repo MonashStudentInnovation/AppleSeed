@@ -101,14 +101,11 @@ public class David {
 }
 ```
 
-## Proofs
+## List of Sample Routes
 
-List of concepts proven
+### Units
 
-* **Objectify integration:** root url calls repository.
-* **Task queues:** `/admin/queue-message` `POST` endpoint. Queues a task that eventually just writes a log message.
-* **Annotation field validation:** Above request includes validation that `message` is not blank. (currently just returns 400 page)
-
-TODO: 
-* **Exception handler and error responses**: Some basic exception mapping to REST responses and 400 error handler to return JSON instead of 400 page.
-
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET    | /unit/:unitCode | Gets Unit by UnitCode |
+| POST   | /unit    | Adds Unit to Database |
