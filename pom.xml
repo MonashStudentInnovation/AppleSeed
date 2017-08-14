@@ -157,6 +157,13 @@
             <scope>test</scope>
         </dependency>
         <!-- end::tests[] -->
+
+        <!-- Login -->
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+        </dependency>
+        <!-- End Login -->
     </dependencies>
 
     <dependencyManagement>
