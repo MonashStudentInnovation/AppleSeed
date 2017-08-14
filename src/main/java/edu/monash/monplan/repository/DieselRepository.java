@@ -1,8 +1,8 @@
-package hello.repository;
+package edu.monash.monplan.repository;
 
 import com.threewks.gaetools.objectify.repository.LongRepository;
 import com.threewks.gaetools.search.gae.SearchConfig;
-import hello.model.Diesel;
+import edu.monash.monplan.model.Diesel;
 import org.springframework.stereotype.Repository;
 
 @Repository

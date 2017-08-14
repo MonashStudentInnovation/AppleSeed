@@ -1,4 +1,4 @@
-package hello;
+package edu.monash.monplan;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;

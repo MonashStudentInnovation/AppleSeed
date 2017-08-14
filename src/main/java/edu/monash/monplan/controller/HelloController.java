@@ -1,6 +1,6 @@
-package hello.controller;
+package edu.monash.monplan.controller;
 
-import hello.service.DieselService;
+import edu.monash.monplan.service.DieselService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

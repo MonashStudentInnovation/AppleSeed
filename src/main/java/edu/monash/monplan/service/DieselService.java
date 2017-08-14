@@ -1,9 +1,9 @@
-package hello.service;
+package edu.monash.monplan.service;
 
 import com.threewks.gaetools.logger.Logger;
 import com.threewks.gaetools.search.Is;
-import hello.model.Diesel;
-import hello.repository.DieselRepository;
+import edu.monash.monplan.model.Diesel;
+import edu.monash.monplan.repository.DieselRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public class DieselService {
         System.out.println(byField);
         List<Diesel> byField2 = dieselRepository.getByField("indexedThing", "testing index yo");
         System.out.println(byField2);
-        List<Diesel> results = dieselRepository.search().field("searchIndexedThing", Is.EqualTo, "hello").run().getResults();
+        List<Diesel> results = dieselRepository.search().field("searchIndexedThing", Is.EqualTo, "edu/monash/monplan").run().getResults();
         System.out.println(results);
 
     }
