@@ -1,10 +1,11 @@
 package edu.monash.monplan.model;
 
-import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.threewks.gaetools.search.SearchIndex;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.monplan.utils.TextSearch;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -40,6 +41,10 @@ public class Unit {
     private BigDecimal enjoyScore;
     @Index
     private BigDecimal learnScore;
+
+    public static class SearchFields {
+        public static final String UnitName = "careerNameSearchableText";
+    }
 
 
     public String getId() {
@@ -129,7 +134,12 @@ public class Unit {
     public void setLearnScore(BigDecimal learnScore) {
         this.learnScore = learnScore;
     }
-    
+
+    @SearchIndex
+    public String getCareerNameSearchableText() {
+        return TextSearch.getSearchableText(unitName);
+    }
+
     public void init() {
         // Protects us from accidentally re-initialising an object that's retrieved from db
         this.setId(UUID.randomUUID().toString());
