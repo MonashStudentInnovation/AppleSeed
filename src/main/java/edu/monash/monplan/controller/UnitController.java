@@ -2,6 +2,7 @@ package edu.monash.monplan.controller;
 
 import edu.monash.monplan.model.Unit;
 import edu.monash.monplan.service.UnitService;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class UnitController {
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     List<Unit> getAllUnits(){
-        return unitService.list();
+        return unitService.listAllUnits();
     }
 
     @RequestMapping(path = "/{unitCode}", method = RequestMethod.GET)
@@ -26,9 +27,16 @@ public class UnitController {
         return unitService.getByUnitCode(unitCode);
     }
 
+    @Async
+    @RequestMapping(path = "/{unitCode}", method = RequestMethod.DELETE)
+    void deleteByUnitCode(@PathVariable(value="unitCode") String unitCode){
+        unitService.delete(unitCode);
+    }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
     Unit insertNewUnit(@RequestBody Unit unit){
         return unitService.addUnit(unit);
     }
+
+
 }
