@@ -16,6 +16,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <spring.boot.version>1.5.3.RELEASE</spring.boot.version>
         <gae.version>1.9.54</gae.version>
+        <org.springframework.security.version>3.2.3.RELEASE</org.springframework.security.version>
         <objectify.version>5.1.21</objectify.version>
         <jodd.version>3.8.6</jodd.version>
     </properties>
@@ -170,8 +171,6 @@
             <version>2.4.0</version>
         </dependency>
         <!-- end::swagger-->
-        <!-- Login -->
-        <!-- End Login -->
     </dependencies>
 
     <dependencyManagement>
