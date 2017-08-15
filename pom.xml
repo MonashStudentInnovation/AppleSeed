@@ -158,11 +158,19 @@
         </dependency>
         <!-- end::tests[] -->
 
-        <!-- Login -->
+        <!-- Swagger -->
         <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.6.1</version>
         </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+        <!-- end::swagger-->
+        <!-- Login -->
         <!-- End Login -->
     </dependencies>
 

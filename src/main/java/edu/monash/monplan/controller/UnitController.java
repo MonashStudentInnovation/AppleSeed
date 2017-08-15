@@ -4,6 +4,8 @@ import edu.monash.monplan.model.Unit;
 import edu.monash.monplan.service.UnitService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/unit")
 public class UnitController {
@@ -15,7 +17,12 @@ public class UnitController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    Unit getUnitByUnitCode(@PathVariable String unitCode){
+    List<Unit> getAllUnits(){
+        return unitService.list();
+    }
+
+    @RequestMapping(path = "/{unitCode}", method = RequestMethod.GET)
+    Unit getUnitByUnitCode(@PathVariable(value="unitCode") String unitCode){
         return unitService.getByUnitCode(unitCode);
     }
 
