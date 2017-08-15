@@ -5,6 +5,8 @@ import edu.monash.monplan.model.Unit;
 import edu.monash.monplan.repository.UnitRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 @Service
@@ -31,4 +33,7 @@ public class UnitService {
         return unitRepository.put(unit);
     }
 
+    public List<Unit> list() {
+        return unitRepository.list(5000);
+    }
 }
