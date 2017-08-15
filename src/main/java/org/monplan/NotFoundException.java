@@ -1,4 +1,4 @@
-package com.monplan;
+package org.monplan;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
