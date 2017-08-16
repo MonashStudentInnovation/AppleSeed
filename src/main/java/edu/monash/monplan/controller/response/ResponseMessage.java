@@ -6,7 +6,9 @@ public class ResponseMessage {
     @NotBlank
     private String message;
 
-    private int code;
+    public ResponseMessage(String message) {
+        this.message = message;
+    }
 
     public String getMessage() {
         return message;
@@ -14,13 +16,5 @@ public class ResponseMessage {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
     }
 }

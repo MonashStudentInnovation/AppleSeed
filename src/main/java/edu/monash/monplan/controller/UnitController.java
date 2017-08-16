@@ -3,12 +3,13 @@ package edu.monash.monplan.controller;
 import edu.monash.monplan.controller.response.ResponseMessage;
 import edu.monash.monplan.model.Unit;
 import edu.monash.monplan.service.UnitService;
+import org.monplan.FailedOperationException;
+import org.monplan.InsufficientResourcesException;
 import org.monplan.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -21,49 +22,58 @@ public class UnitController {
         this.unitService = unitService;
     }
 
+    @RequestMapping(path = "", method = RequestMethod.POST)
+    ResponseEntity createUnit(@RequestBody Unit unit){
+        try {
+            return new ResponseEntity<>(unitService.createUnit(unit), HttpStatus.OK);
+        } catch (FailedOperationException e) {
+            return new ResponseEntity<>(new ResponseMessage("Unit Id is already in use"), HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @RequestMapping(path = "", method = RequestMethod.GET)
-    List<Unit> getAllUnits(){
-        return unitService.listAllUnits();
+    List<Unit> getUnits(@RequestParam(value="unitName", required=false) String unitName){
+        // If no query params, simply list all, otherwise list all by unitName.
+        if (unitName == null) {
+            return unitService.listAllUnits();
+        } else {
+            return unitService.getUnitsByUnitName(unitName);
+        }
     }
 
     @RequestMapping(path = "/{unitCode}", method = RequestMethod.GET)
-    Object getUnitByUnitCode(@PathVariable(value="unitCode") String unitCode){
-        Unit unit = unitService.getByUnitCode(unitCode);
+    ResponseEntity getUnitByUnitCode(@PathVariable(value="unitCode") String unitCode){
+        Unit unit = unitService.getUnitByUnitCode(unitCode);
         if (unit == null) {
-            ResponseMessage message = new ResponseMessage();
-            message.setMessage("Unit code not found");
-            message.setCode(404);
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ResponseMessage("Unit code not found"), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(unit, HttpStatus.OK);
     }
 
-    @RequestMapping(path="/search/{searchItem}", method = RequestMethod.GET)
-    List<Unit> getUnitByUnitName(@PathVariable(value = "searchItem") String searchItem){
-        return unitService.getByName(searchItem);
+    @RequestMapping(path = "/{unitId}", method = RequestMethod.PUT)
+    ResponseEntity updateUnitByUnitId(@PathVariable(value="unitId") String unitId, @RequestBody Unit unit){
+        try {
+            unit.setId(unitId);
+            Unit updatedUnit = unitService.updateUnitByUnitId(unit);
+            return new ResponseEntity<>(updatedUnit, HttpStatus.OK);
+        } catch (InsufficientResourcesException e) {
+            // This should never happen, but it might.
+            return new ResponseEntity<>(new ResponseMessage("Unit Id must be provided"), HttpStatus.PRECONDITION_FAILED);
+        } catch (NotFoundException e) {
+            return new ResponseEntity<>(new ResponseMessage("Unit Id not found"), HttpStatus.NOT_FOUND);
+        }
     }
 
     @Async
     @RequestMapping(path = "/{unitId}", method = RequestMethod.DELETE)
-    ResponseEntity<ResponseMessage> deleteByUnitCode(@PathVariable(value="unitId") String unitId){
-        ResponseMessage message = new ResponseMessage();
-
+    ResponseEntity<ResponseMessage> deleteByUnitId(@PathVariable(value="unitId") String unitId){
         try {
-            unitService.delete(unitId);
-            message.setMessage("Delete operation success");
-            message.setCode(200);
-
-            return new ResponseEntity<>(message, HttpStatus.OK);
-        } catch (Exception e) {
-            message.setMessage(e.getLocalizedMessage());
-            message.setCode(404);
-            return new ResponseEntity<>(message, HttpStatus.OK);
+            unitService.deleteUnit(unitId);
+            return new ResponseEntity<>(new ResponseMessage("Delete operation success"), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            return new ResponseEntity<>(new ResponseMessage("Unit Id not found"), HttpStatus.NOT_FOUND);
+        } catch (FailedOperationException e) {
+            return new ResponseEntity<>(new ResponseMessage("Delete operation failed"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    @RequestMapping(path = "", method = RequestMethod.POST)
-    Unit insertNewUnit(@RequestBody Unit unit){
-        return unitService.addUnit(unit);
-    }
-
 }
