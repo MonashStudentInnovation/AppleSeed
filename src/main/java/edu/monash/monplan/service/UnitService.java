@@ -1,7 +1,10 @@
 package edu.monash.monplan.service;
 
+import edu.monash.monplan.controller.response.ResponseMessage;
 import edu.monash.monplan.model.Unit;
 import edu.monash.monplan.repository.UnitRepository;
+import org.monplan.FailedOperationException;
+import org.monplan.NotFoundException;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +39,13 @@ public class UnitService {
     }
 
     public Unit getByUnitCode(String unitCode){
-        Unit unit = unitRepository.getByField("unitCode", unitCode ).get(0);
-        return unit;
+        List<Unit> units = unitRepository.getByField("unitCode", unitCode );
+
+        // the search result is either 0 or 1 units
+        if (units.size() == 1) {
+            return unitRepository.getByField("unitCode", unitCode ).get(0);
+        }
+        return null;
     }
 
     public Unit addUnit(Unit unit){
@@ -51,7 +59,17 @@ public class UnitService {
 
     @Async
     public void delete(String id){
+        Unit unit = unitRepository.get(id);
+        if (unit == null) {
+            throw new NotFoundException();
+        }
+
         unitRepository.deleteByKey(id);
+
+        unit = unitRepository.get(id);
+        if (unit != null) {
+            throw new FailedOperationException();
+        }
     }
 
     public Unit find(String id){
