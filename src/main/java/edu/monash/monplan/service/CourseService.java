@@ -66,8 +66,7 @@ public class CourseService {
     }
 
     @Async
-    public void delete(String id) {
-        // TODO: Integrate with new delete in unit.
+    public void delete(String id) throws NotFoundException, FailedOperationException {
         Course course = courseRepository.get(id);
         if (course == null) {
             throw new NotFoundException();

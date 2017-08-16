@@ -3,12 +3,17 @@ package edu.monash.monplan.controller;
 import edu.monash.monplan.controller.response.ResponseMessage;
 import edu.monash.monplan.model.Course;
 import edu.monash.monplan.service.CourseService;
+import org.monplan.exceptions.FailedOperationException;
+import org.monplan.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+// TODO: Change naming to CRUD.
+// TODO: Fix search.
 
 @RestController
 @RequestMapping("/courses")
@@ -26,16 +31,13 @@ public class CourseController {
     }
 
     @RequestMapping(path = "/{courseCode}", method = RequestMethod.GET)
-    Course getCourseByCourseCode(@PathVariable(value="courseCode") String courseCode) {
-         return courseService.getByCourseCode(courseCode);
-//        Unit unit = unitService.getByUnitCode(unitCode);
-//        if (unit == null) {
-//            ResponseMessage message = new ResponseMessage();
-//            message.setMessage("Unit code not found");
-//            message.setCode(404);
-//            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-//        }
-//        return new ResponseEntity<> (unit, HttpStatus.OK);
+    ResponseEntity getCourseByCourseCode(@PathVariable(value="courseCode") String courseCode) {
+         Course course =  courseService.getByCourseCode(courseCode);
+
+         if (course == null) {
+             return new ResponseEntity<>(new ResponseMessage("Course code not found"), HttpStatus.NOT_FOUND);
+         }
+         return new ResponseEntity<>(course, HttpStatus.OK);
     }
 
     @RequestMapping(path="/search/{searchItem}", method = RequestMethod.GET)
@@ -46,18 +48,13 @@ public class CourseController {
     @Async
     @RequestMapping(path = "/{courseCode}", method = RequestMethod.DELETE)
     ResponseEntity<ResponseMessage>  deleteByCourseCode(@PathVariable(value="courseCode") String courseCode){
-        ResponseMessage message = new ResponseMessage();
-
         try {
             courseService.delete(courseCode);
-            message.setMessage("Delete operation success");
-            message.setCode(200);
-
-            return new ResponseEntity<>(message, HttpStatus.OK);
-        } catch (Exception e) {
-            message.setMessage(e.getLocalizedMessage());
-            message.setCode(404);
-            return new ResponseEntity<>(message, HttpStatus.OK);
+            return new ResponseEntity<>(new ResponseMessage("Delete operation success"), HttpStatus.OK);
+        } catch (NotFoundException e) {
+            return new ResponseEntity<>(new ResponseMessage("Course code not found"), HttpStatus.NOT_FOUND);
+        } catch (FailedOperationException e) {
+            return new ResponseEntity<>(new ResponseMessage("Delete operation failed"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
