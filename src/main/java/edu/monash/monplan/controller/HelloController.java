@@ -15,10 +15,7 @@ public class HelloController {
 
     @RequestMapping("/")
     public String index() {
-
-        dieselService.doIt();
-
-        return "Greetings from Spring Boot yo!";
+        return "Welcome to the monPlan Springboot API, please refer to the documentation";
     }
 
 }
