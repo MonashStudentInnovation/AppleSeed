@@ -1,19 +1,6 @@
-## Developing for SpringBoot Java 8
+# Developing for SpringBoot Java 8
 
-Currently just running locally through terminal only
-
-```
-mvn appengine:devserver
-```
-
-You should also clean the package after fixing errors
-```
-mvn clean package
-```
-
-**NOTE:** This currently does **not** work using the IntellIJ IDEA debugger.
-
-### New Models
+## New Models
 
 Each new **kind** for entity must follow the following model:
 
@@ -44,7 +31,7 @@ private void registerObjectifyEntities() {
 
 So we can wire this up.
 
-#### Making the David.class Model
+### Making the David.class Model
 ```java
 package edu.monash.monplan.model;
 
