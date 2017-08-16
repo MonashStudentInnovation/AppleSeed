@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * An interface extension for {@link Repository} which enables asynchronous interfaces for
- * save and delete operations.
+ * save and deleteUnit operations.
  *
  * @param <E> The entity type
  * @param <K> The key type of the entity
@@ -50,7 +50,7 @@ public interface AsyncRepository<E, K> extends Repository<E, K> {
      * Delete the entity with the given id
      *
      * @param key
-     * @return an async operation used to complete the delete operation
+     * @return an async operation used to complete the deleteUnit operation
      */
     AsyncResult<Void> deleteByKeyAsync(K key);
 
@@ -58,7 +58,7 @@ public interface AsyncRepository<E, K> extends Repository<E, K> {
      * Delete the entities with the given ids
      *
      * @param keys
-     * @return an async operation used to complete the delete operation
+     * @return an async operation used to complete the deleteUnit operation
      */
     @SuppressWarnings("unchecked")
     AsyncResult<Void> deleteByKeyAsync(K... keys);
@@ -67,7 +67,7 @@ public interface AsyncRepository<E, K> extends Repository<E, K> {
      * Delete the entities with the given ids
      *
      * @param ids
-     * @return an async operation used to complete the delete operation
+     * @return an async operation used to complete the deleteUnit operation
      */
     AsyncResult<Void> deleteByKeyAsync(Iterable<K> ids);
 
@@ -75,7 +75,7 @@ public interface AsyncRepository<E, K> extends Repository<E, K> {
      * Delete the given entity
      *
      * @param entity
-     * @return an async operation used to complete the delete operation
+     * @return an async operation used to complete the deleteUnit operation
      */
     AsyncResult<Void> deleteAsync(E entity);
 
@@ -83,7 +83,7 @@ public interface AsyncRepository<E, K> extends Repository<E, K> {
      * Delete the given entities
      *
      * @param entities
-     * @return an async operation used to complete the delete operation
+     * @return an async operation used to complete the deleteUnit operation
      */
     @SuppressWarnings("unchecked")
     AsyncResult<Void> deleteAsync(E... entities);
@@ -92,7 +92,7 @@ public interface AsyncRepository<E, K> extends Repository<E, K> {
      * Delete the given entities
      *
      * @param entities
-     * @return an async operation used to complete the delete operation
+     * @return an async operation used to complete the deleteUnit operation
      */
     AsyncResult<Void> deleteAsync(Iterable<E> entities);
 }

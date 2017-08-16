@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-public class FailedOperationException extends RuntimeException {
+public class FailedOperationException extends Exception {
     public FailedOperationException() {
         super();
     }

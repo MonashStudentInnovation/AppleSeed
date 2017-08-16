@@ -168,7 +168,7 @@ public abstract class BaseGaeSearchService<T, K> implements SearchExecutor<T, K,
         GetRequest request = GetRequest.newBuilder().setReturningIdsOnly(true).setLimit(200).build();
         GetResponse<Document> response = index.getRange(request);
 
-        // can only delete documents in blocks of 200 so we need to iterate until they're all gone
+        // can only deleteUnit documents in blocks of 200 so we need to iterate until they're all gone
         while (!response.getResults().isEmpty()) {
             List<String> ids = new ArrayList<>();
             for (Document document : response) {
