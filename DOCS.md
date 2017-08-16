@@ -1,6 +1,6 @@
 # Developing for SpringBoot Java 8
 
-# New Models
+## New Models
 
 Each new **kind** for entity must follow the following model:
 
