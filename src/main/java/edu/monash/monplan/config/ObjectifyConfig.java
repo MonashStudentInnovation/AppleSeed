@@ -1,6 +1,7 @@
 package edu.monash.monplan.config;
 
 import com.googlecode.objectify.ObjectifyService;
+import edu.monash.monplan.model.Course;
 import edu.monash.monplan.model.Unit;
 import edu.monash.monplan.model.Diesel;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ public class ObjectifyConfig {
     private void registerObjectifyEntities() {
         register(Diesel.class);
         register(Unit.class);
+        register(Course.class);
     }
 
 
