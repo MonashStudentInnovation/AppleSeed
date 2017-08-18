@@ -3,16 +3,12 @@ package org.monplan.utils;
 import com.google.common.base.Joiner;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
 public class TextSearch {
     private static final Pattern SPACE_SEPARATOR_PATTERN = Pattern.compile("\\s+");
-    public static final String[] IGNORED_SET_VALUES = new String[] {"THE", "INTRODUCTION", "AND", "OF", "TO"};
-    public static final Set<String> IGNORED_SINGLE_WORDS = new HashSet<String>(Arrays.asList(IGNORED_SET_VALUES));
 
     /**
      * Generates all substring permutations of one or more input strings, intended to be used as a search index to facilitate partial string searching.
