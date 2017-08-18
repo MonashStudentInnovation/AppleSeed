@@ -4,7 +4,7 @@ import edu.monash.monplan.controller.response.ResponseMessage;
 import edu.monash.monplan.model.Unit;
 import edu.monash.monplan.service.UnitService;
 import org.monplan.exceptions.FailedOperationException;
-import org.monplan.InsufficientResourcesException;
+import org.monplan.exceptions.InsufficientResourcesException;
 import org.monplan.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
