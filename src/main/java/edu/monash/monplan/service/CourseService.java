@@ -1,6 +1,7 @@
 package edu.monash.monplan.service;
 
 import edu.monash.monplan.model.Course;
+import edu.monash.monplan.model.Unit;
 import edu.monash.monplan.repository.CourseRepository;
 import org.monplan.InsufficientResourcesException;
 import org.monplan.exceptions.FailedOperationException;
@@ -39,8 +40,8 @@ public class CourseService {
     public Course getCourseByCourseCode(String courseCode) {
         List<Course> courses = courseRepository.getByField("courseCode", courseCode);
         System.out.println("course code: " + courseCode);
-        // The search result is either 0 or 1 units.
-        if (courses.size() == 1) {
+        // The search result should be either 0 or 1 units.
+        if (courses.size() > 0) {
             return courses.get(0);
         }
         return null;
@@ -58,13 +59,15 @@ public class CourseService {
                         "Course id %s is already in use.", courseWithId.getId()));
             }
         }
-        String courseCode = course.getCourseCode();
-        this.save(course);
+
+        // save the course
+        Course savedCourse = this.save(course);
+
         // Try to get the course we saved from datastore.
-        Course savedCourse = this.getCourseByCourseCode(courseCode);
-        if (savedCourse == null) {
+        Course courseInDatastore = courseRepository.get(savedCourse.getId());
+        if (courseInDatastore == null) {
             // Could not save in datastore.
-            throw new FailedOperationException(String.format("Course %s could not be saved.", courseCode));
+            throw new FailedOperationException(String.format("Course id %s could not be saved.", savedCourse.getId()));
         }
         return this.save(course);
     }
