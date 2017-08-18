@@ -40,15 +40,28 @@ public class UnitController {
     // HTTP GET.
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    List<Unit> getUnits(@RequestParam(value="unitName", required=false) String[] unitNames){
+    List<Unit> getUnits(@RequestParam(value="unitCode", required=false) String[] unitCodes,
+                        @RequestParam(value="unitName", required=false) String[] unitNames){
         // If no query params, simply list all, otherwise list all by unitName.
-        if (unitNames == null) {
+        if (unitCodes == null && unitNames == null) {
             return unitService.listAllUnits();
-        } else {
-            // initialize the results to a set, because we only want unique units
-            Set<String> seenUnitCodes = new HashSet<>();
-            List<Unit> results = new ArrayList<>();
+        }
 
+        // initialize the results to a set, because we only want unique units
+        Set<String> seenUnitCodes = new HashSet<>();
+        List<Unit> results = new ArrayList<>();
+        if (unitCodes != null) {
+            // for each given unitCode, find the matches for that
+            for (String unitCode: unitCodes) {
+                Unit unit = unitService.getUnitsByUnitCode(unitCode);
+                // only add to results if unit is not null and if we have not seen this unit code
+                if (unit != null && !seenUnitCodes.contains(unit.getUnitCode())) {
+                    results.add(unit);
+                    seenUnitCodes.add(unit.getUnitCode());
+                }
+            }
+        }
+        if (unitNames != null) {
             // for each given unitName, find the matches for that
             for (String unitName : unitNames) {
                 List<Unit> matches = unitService.getUnitsByUnitName(unitName);
@@ -56,12 +69,12 @@ public class UnitController {
                     // only add to results if we have not seen this unit code
                     if (!seenUnitCodes.contains(unit.getUnitCode())) {
                         results.add(unit);
+                        seenUnitCodes.add(unit.getUnitCode());
                     }
-                    seenUnitCodes.add(unit.getUnitCode());
                 }
             }
-            return results;
         }
+        return results;
     }
 
     @RequestMapping(path = "/{unitCode}", method = RequestMethod.GET)

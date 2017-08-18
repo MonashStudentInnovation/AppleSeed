@@ -2,6 +2,7 @@ package edu.monash.monplan.controller;
 
 import edu.monash.monplan.controller.response.ResponseMessage;
 import edu.monash.monplan.model.Course;
+import edu.monash.monplan.model.Unit;
 import edu.monash.monplan.service.CourseService;
 import org.monplan.InsufficientResourcesException;
 import org.monplan.exceptions.FailedOperationException;
@@ -11,7 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 // TODO: Change naming to CRUD.
 // TODO: Fix search.
@@ -40,13 +44,41 @@ public class CourseController {
     // HTTP GET.
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    List<Course> getCourses(@RequestParam(value="courseName", required=false) String courseName) {
+    List<Course> getCourses(@RequestParam(value="courseCode", required=false) String[] courseCodes,
+                            @RequestParam(value="courseName", required=false) String[] courseNames) {
         // If no query params, list all courses, otherwise list a by course name.
-        if (courseName == null) {
+        if (courseCodes == null && courseNames == null) {
             return courseService.listAllCourses();
-        } else {
-            return courseService.getCoursesByCourseName(courseName);
         }
+
+        // initialize the results to a set, because we only want unique courses
+        Set<String> seenCourseCodes = new HashSet<>();
+        List<Course> results = new ArrayList<>();
+        if (courseCodes != null) {
+            // for each given courseCode, find the matches for that
+            for (String courseCode : courseCodes) {
+                Course course = courseService.getCourseByCourseCode(courseCode);
+                // only add to results if course is not null and if we have not seen this course code
+                if (course != null && !seenCourseCodes.contains(course.getCourseCode())) {
+                    results.add(course);
+                    seenCourseCodes.add(course.getCourseCode());
+                }
+            }
+        }
+        if (courseNames != null) {
+            // for each given courseName, find the matches for that
+            for (String courseName : courseNames) {
+                List<Course> matches = courseService.getCoursesByCourseName(courseName);
+                for (Course course: matches) {
+                    // only add to results if we have not seen this course code
+                    if (!seenCourseCodes.contains(course.getCourseCode())) {
+                        results.add(course);
+                        seenCourseCodes.add(course.getCourseCode());
+                    }
+                }
+            }
+        }
+        return results;
     }
 
     @RequestMapping(path = "/{courseCode}", method = RequestMethod.GET)
