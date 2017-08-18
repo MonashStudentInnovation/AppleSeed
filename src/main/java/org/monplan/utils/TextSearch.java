@@ -3,12 +3,16 @@ package org.monplan.utils;
 import com.google.common.base.Joiner;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
 public class TextSearch {
     private static final Pattern SPACE_SEPARATOR_PATTERN = Pattern.compile("\\s+");
+    public static final String[] IGNORED_SET_VALUES = new String[] {"THE", "INTRODUCTION", "AND", "OF", "TO"};
+    public static final Set<String> IGNORED_SINGLE_WORDS = new HashSet<String>(Arrays.asList(IGNORED_SET_VALUES));
 
     /**
      * Generates all substring permutations of one or more input strings, intended to be used as a search index to facilitate partial string searching.
@@ -23,15 +27,7 @@ public class TextSearch {
         for (String sourceString : strings) {
             String string = StringUtils.upperCase(StringUtils.trimToNull(sourceString));
             if (string != null) {
-
-                // Firstly get all substrings including spaces so we get search term match as it is typed
                 allUppercaseSubstrings.addAll(getAllSubstrings(string));
-
-                // Now do the same per word so you can search for surname only for example
-                for (String word : SPACE_SEPARATOR_PATTERN.split(string)) {
-                    Set<String> upperCaseSubstrings = getAllSubstrings(word.toUpperCase());
-                    allUppercaseSubstrings.addAll(upperCaseSubstrings);
-                }
             }
         }
         return Joiner.on(" ").join(allUppercaseSubstrings);
@@ -52,5 +48,26 @@ public class TextSearch {
 
         return substrings;
     }
+
+    public static String getSearchableTextOld(String... strings) {
+        Set<String> allUppercaseSubstrings = new LinkedHashSet<>();
+
+        for (String sourceString : strings) {
+            String string = StringUtils.upperCase(StringUtils.trimToNull(sourceString));
+            if (string != null) {
+
+                // Firstly get all substrings including spaces so we get search term match as it is typed
+                allUppercaseSubstrings.addAll(getAllSubstrings(string));
+
+                // Now do the same per word so you can search for surname only for example
+                for (String word : SPACE_SEPARATOR_PATTERN.split(string)) {
+                    Set<String> upperCaseSubstrings = getAllSubstrings(word.toUpperCase());
+                    allUppercaseSubstrings.addAll(upperCaseSubstrings);
+                }
+            }
+        }
+        return Joiner.on(" ").join(allUppercaseSubstrings);
+    }
+
 
 }
