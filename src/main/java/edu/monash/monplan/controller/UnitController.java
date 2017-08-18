@@ -22,14 +22,18 @@ public class UnitController {
         this.unitService = unitService;
     }
 
+    // HTTP CREATE.
+
     @RequestMapping(path = "", method = RequestMethod.POST)
     ResponseEntity createUnit(@RequestBody Unit unit){
         try {
             return new ResponseEntity<>(unitService.createUnit(unit), HttpStatus.OK);
         } catch (FailedOperationException e) {
-            return new ResponseEntity<>(new ResponseMessage("Unit Id is already in use"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
+
+    // HTTP GET.
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     List<Unit> getUnits(@RequestParam(value="unitName", required=false) String unitName){
@@ -43,12 +47,16 @@ public class UnitController {
 
     @RequestMapping(path = "/{unitCode}", method = RequestMethod.GET)
     ResponseEntity getUnitByUnitCode(@PathVariable(value="unitCode") String unitCode){
-        Unit unit = unitService.getUnitByUnitCode(unitCode);
+        Unit unit = unitService.getUnitsByUnitCode(unitCode);
         if (unit == null) {
-            return new ResponseEntity<>(new ResponseMessage("Unit code not found"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ResponseMessage(
+                    String.format("Unit code %s not found", unitCode)),
+                    HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(unit, HttpStatus.OK);
     }
+
+    // HTTP UPDATE.
 
     @RequestMapping(path = "/{unitId}", method = RequestMethod.PUT)
     ResponseEntity updateUnitByUnitId(@PathVariable(value="unitId") String unitId, @RequestBody Unit unit){
@@ -58,11 +66,13 @@ public class UnitController {
             return new ResponseEntity<>(updatedUnit, HttpStatus.OK);
         } catch (InsufficientResourcesException e) {
             // This should never happen, but it might.
-            return new ResponseEntity<>(new ResponseMessage("Unit Id must be provided"), HttpStatus.PRECONDITION_FAILED);
+            return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.PRECONDITION_FAILED);
         } catch (NotFoundException e) {
-            return new ResponseEntity<>(new ResponseMessage("Unit Id not found"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.NOT_FOUND);
         }
     }
+
+    // HTTP DELETE.
 
     @Async
     @RequestMapping(path = "/{unitId}", method = RequestMethod.DELETE)
@@ -71,9 +81,9 @@ public class UnitController {
             unitService.deleteUnit(unitId);
             return new ResponseEntity<>(new ResponseMessage("Delete operation success"), HttpStatus.OK);
         } catch (NotFoundException e) {
-            return new ResponseEntity<>(new ResponseMessage("Unit Id not found"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.NOT_FOUND);
         } catch (FailedOperationException e) {
-            return new ResponseEntity<>(new ResponseMessage("Delete operation failed"), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
