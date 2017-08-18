@@ -2,7 +2,7 @@ package edu.monash.monplan.service;
 
 import edu.monash.monplan.model.Course;
 import edu.monash.monplan.repository.CourseRepository;
-import org.monplan.InsufficientResourcesException;
+import org.monplan.exceptions.InsufficientResourcesException;
 import org.monplan.exceptions.FailedOperationException;
 import org.monplan.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;

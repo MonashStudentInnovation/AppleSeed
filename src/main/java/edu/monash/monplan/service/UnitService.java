@@ -3,7 +3,7 @@ package edu.monash.monplan.service;
 import edu.monash.monplan.model.Unit;
 import edu.monash.monplan.repository.UnitRepository;
 import org.monplan.exceptions.FailedOperationException;
-import org.monplan.InsufficientResourcesException;
+import org.monplan.exceptions.InsufficientResourcesException;
 import org.monplan.exceptions.NotFoundException;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
