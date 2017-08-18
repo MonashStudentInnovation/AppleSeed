@@ -6,11 +6,7 @@ import org.monplan.InsufficientResourcesException;
 import org.monplan.exceptions.FailedOperationException;
 import org.monplan.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
-
-
-import edu.monash.monplan.model.Unit;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

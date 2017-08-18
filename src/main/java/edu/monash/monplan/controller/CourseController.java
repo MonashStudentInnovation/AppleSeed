@@ -2,7 +2,6 @@ package edu.monash.monplan.controller;
 
 import edu.monash.monplan.controller.response.ResponseMessage;
 import edu.monash.monplan.model.Course;
-import edu.monash.monplan.model.Unit;
 import edu.monash.monplan.service.CourseService;
 import org.monplan.InsufficientResourcesException;
 import org.monplan.exceptions.FailedOperationException;
