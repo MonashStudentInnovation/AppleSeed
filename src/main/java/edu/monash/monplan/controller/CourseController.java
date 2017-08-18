@@ -2,7 +2,9 @@ package edu.monash.monplan.controller;
 
 import edu.monash.monplan.controller.response.ResponseMessage;
 import edu.monash.monplan.model.Course;
+import edu.monash.monplan.model.Unit;
 import edu.monash.monplan.service.CourseService;
+import org.monplan.InsufficientResourcesException;
 import org.monplan.exceptions.FailedOperationException;
 import org.monplan.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
@@ -25,25 +27,58 @@ public class CourseController {
         this.courseService = courseService;
     }
 
+    // HTTP CREATE.
+
+    @RequestMapping(path = "", method = RequestMethod.POST)
+    ResponseEntity createCourse(@RequestBody Course course) {
+        try {
+            return new ResponseEntity<>(courseService.createCourse(course), HttpStatus.OK);
+        } catch (FailedOperationException e) {
+            return  new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // HTTP GET.
+
     @RequestMapping(path = "", method = RequestMethod.GET)
-    List<Course> getAllCourses(){
-        return courseService.listAllUnits();
+    List<Course> getCourses(@RequestParam(value="courseName", required=false) String courseName) {
+        // If no query params, list all courses, otherwise list a by course name.
+        if (courseName == null) {
+            return courseService.listAllCourses();
+        } else {
+            return courseService.getCoursesByCourseName(courseName);
+        }
     }
 
     @RequestMapping(path = "/{courseCode}", method = RequestMethod.GET)
     ResponseEntity getCourseByCourseCode(@PathVariable(value="courseCode") String courseCode) {
-         Course course =  courseService.getByCourseCode(courseCode);
-
+         Course course = courseService.getCourseByCourseCode(courseCode);
          if (course == null) {
-             return new ResponseEntity<>(new ResponseMessage("Course code not found"), HttpStatus.NOT_FOUND);
+             return new ResponseEntity<>(new ResponseMessage(
+                     String.format("Course code %s not found.", courseCode)),
+                     HttpStatus.NOT_FOUND);
          }
          return new ResponseEntity<>(course, HttpStatus.OK);
     }
 
-    @RequestMapping(path="/search/{searchItem}", method = RequestMethod.GET)
-    List<Course> getCourseByCourseName(@PathVariable(value = "searchItem") String searchItem) {
-        return courseService.getByName(searchItem);
+    // HTTP UPDATE.
+
+    @RequestMapping(path = "/{courseId}", method = RequestMethod.PUT)
+    ResponseEntity updateCourseByCourseId(@PathVariable(value="courseId") String courseId, @RequestBody Course course) {
+        try {
+            course.setId(courseId);
+            Course updatedCourse = courseService.updateCourseByCourseId(course);
+            return new ResponseEntity<>(updatedCourse, HttpStatus.OK);
+        } catch (InsufficientResourcesException e) {
+            // This should never happen, but it might.
+            return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.PRECONDITION_FAILED);
+        } catch (NotFoundException e) {
+            return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.NOT_FOUND);
+        }
     }
+
+
+    // HTTP DELETE.
 
     @Async
     @RequestMapping(path = "/{courseCode}", method = RequestMethod.DELETE)
@@ -54,13 +89,10 @@ public class CourseController {
         } catch (NotFoundException e) {
             return new ResponseEntity<>(new ResponseMessage("Course code not found"), HttpStatus.NOT_FOUND);
         } catch (FailedOperationException e) {
-            return new ResponseEntity<>(new ResponseMessage("Delete operation failed"), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @RequestMapping(path = "", method = RequestMethod.POST)
-    Course insertNewCourse(@RequestBody Course course){
-        return courseService.addCourse(course);
-    }
+
 
 }
