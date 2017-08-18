@@ -1,0 +1,6 @@
+
+
+
+
+- using web.xml and servlet 2.5. can we use servlet 3 and no web.xml ?
+
