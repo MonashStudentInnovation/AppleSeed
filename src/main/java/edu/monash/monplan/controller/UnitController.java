@@ -10,7 +10,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/units")
@@ -36,13 +40,41 @@ public class UnitController {
     // HTTP GET.
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    List<Unit> getUnits(@RequestParam(value="unitName", required=false) String unitName){
+    List<Unit> getUnits(@RequestParam(value="unitCode", required=false) String[] unitCodes,
+                        @RequestParam(value="unitName", required=false) String[] unitNames){
         // If no query params, simply list all, otherwise list all by unitName.
-        if (unitName == null) {
+        if (unitCodes == null && unitNames == null) {
             return unitService.listAllUnits();
-        } else {
-            return unitService.getUnitsByUnitName(unitName);
         }
+
+        // initialize the results to a set, because we only want unique units
+        Set<String> seenUnitCodes = new HashSet<>();
+        List<Unit> results = new ArrayList<>();
+        if (unitCodes != null) {
+            // for each given unitCode, find the matches for that
+            for (String unitCode: unitCodes) {
+                Unit unit = unitService.getUnitsByUnitCode(unitCode);
+                // only add to results if unit is not null and if we have not seen this unit code
+                if (unit != null && !seenUnitCodes.contains(unit.getUnitCode())) {
+                    results.add(unit);
+                    seenUnitCodes.add(unit.getUnitCode());
+                }
+            }
+        }
+        if (unitNames != null) {
+            // for each given unitName, find the matches for that
+            for (String unitName : unitNames) {
+                List<Unit> matches = unitService.getUnitsByUnitName(unitName);
+                for (Unit unit: matches) {
+                    // only add to results if we have not seen this unit code
+                    if (!seenUnitCodes.contains(unit.getUnitCode())) {
+                        results.add(unit);
+                        seenUnitCodes.add(unit.getUnitCode());
+                    }
+                }
+            }
+        }
+        return results;
     }
 
     @RequestMapping(path = "/{unitCode}", method = RequestMethod.GET)

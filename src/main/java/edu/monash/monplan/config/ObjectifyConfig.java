@@ -1,8 +1,7 @@
 package edu.monash.monplan.config;
 
 import com.googlecode.objectify.ObjectifyService;
-import edu.monash.monplan.model.Course;
-import edu.monash.monplan.model.Unit;
+import edu.monash.monplan.model.*;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +18,8 @@ public class ObjectifyConfig {
     private void registerObjectifyEntities() {
         register(Unit.class);
         register(Course.class);
+        register(Rules.class);
+        register(Auth.class);
     }
 
 
