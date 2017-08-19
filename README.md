@@ -34,7 +34,10 @@ mvn clean package
 ## Deploying to Google App Engine
 You will need to change the configuration at `/src/main/webapp/WEB-INF/appengine-web.xml`
 
-## List of Sample Routes
+## Documentation
+We have included **springfox-swagger2** and **springfox-swagger-ui** as Repos, allowing you to document code automatically.
+
+To access the documentation locally visit: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
 ### Units
 
