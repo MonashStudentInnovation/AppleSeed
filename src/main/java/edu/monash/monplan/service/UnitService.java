@@ -47,13 +47,15 @@ public class UnitService {
                 throw new FailedOperationException(String.format("Unit id %s is already in use.", unitWithId.getId()));
             }
         }
-        String unitCode = unit.getUnitCode();
-        this.save(unit);
+
+        // save the unit
+        Unit savedUnit = this.save(unit);
+
         // Try to get the unit we saved from datastore.
-        Unit savedUnit = this.getUnitsByUnitCode(unitCode);
-        if (savedUnit == null) {
+        Unit unitInDatastore = unitRepository.get(savedUnit.getId());
+        if (unitInDatastore == null) {
             // Could not save in datastore.
-            throw new FailedOperationException(String.format("Unit %s could not be saved.", unitCode));
+            throw new FailedOperationException(String.format("Unit id %s could not saved.", savedUnit.getId()));
         }
         return savedUnit;
     }
@@ -64,8 +66,8 @@ public class UnitService {
 
     public Unit getUnitsByUnitCode(String unitCode){
         List<Unit> units = unitRepository.getByField("unitCode", unitCode );
-        // The search result is either 0 or 1 units.
-        if (units.size() == 1) {
+        // The search result should be either 0 or 1 units.
+        if (units.size() > 0) {
             return units.get(0);
         }
         return null;
