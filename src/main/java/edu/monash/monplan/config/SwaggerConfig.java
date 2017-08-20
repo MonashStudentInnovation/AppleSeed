@@ -31,7 +31,7 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
                 "v2",
                 "Terms of service",
                 "esol-monplan-ops-l@monash.edu",
-                "MIT",
+                "Closed",
                 "https://github.com/lorderikir/springboot-base-gae-java8/blob/master/LICENSE");
         return apiInfo;
     }
