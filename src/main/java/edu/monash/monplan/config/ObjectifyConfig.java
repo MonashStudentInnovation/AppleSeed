@@ -16,7 +16,6 @@ public class ObjectifyConfig {
     }
 
     private void registerObjectifyEntities() {
-        register(Diesel.class);
         register(Unit.class);
         register(Course.class);
         register(Rules.class);
