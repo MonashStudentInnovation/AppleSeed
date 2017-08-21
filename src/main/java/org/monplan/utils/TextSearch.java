@@ -23,15 +23,7 @@ public class TextSearch {
         for (String sourceString : strings) {
             String string = StringUtils.upperCase(StringUtils.trimToNull(sourceString));
             if (string != null) {
-
-                // Firstly get all substrings including spaces so we get search term match as it is typed
                 allUppercaseSubstrings.addAll(getAllSubstrings(string));
-
-                // Now do the same per word so you can search for surname only for example
-                for (String word : SPACE_SEPARATOR_PATTERN.split(string)) {
-                    Set<String> upperCaseSubstrings = getAllSubstrings(word.toUpperCase());
-                    allUppercaseSubstrings.addAll(upperCaseSubstrings);
-                }
             }
         }
         return Joiner.on(" ").join(allUppercaseSubstrings);
@@ -52,5 +44,26 @@ public class TextSearch {
 
         return substrings;
     }
+
+    public static String getSearchableTextOld(String... strings) {
+        Set<String> allUppercaseSubstrings = new LinkedHashSet<>();
+
+        for (String sourceString : strings) {
+            String string = StringUtils.upperCase(StringUtils.trimToNull(sourceString));
+            if (string != null) {
+
+                // Firstly get all substrings including spaces so we get search term match as it is typed
+                allUppercaseSubstrings.addAll(getAllSubstrings(string));
+
+                // Now do the same per word so you can search for surname only for example
+                for (String word : SPACE_SEPARATOR_PATTERN.split(string)) {
+                    Set<String> upperCaseSubstrings = getAllSubstrings(word.toUpperCase());
+                    allUppercaseSubstrings.addAll(upperCaseSubstrings);
+                }
+            }
+        }
+        return Joiner.on(" ").join(allUppercaseSubstrings);
+    }
+
 
 }
