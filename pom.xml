@@ -3,14 +3,25 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>monplan-api-java8</groupId>
-    <artifactId>monplan-api-java8</artifactId>
+    <groupId>springboot-base-gae-java8</groupId>
+    <artifactId>springboot-base-gae-java8</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <appId>monplan-api-java8</appId>
+        <!-- [START]: CONFIGURATION Your Application Here-->
+        <appId>springboot-base-gae-java8</appId>
+        <environmentID></environmentID>
         <appVersion>1</appVersion>
+        <!-- {END] CONFIGURATION-->
+
+
+        <!-- [DO NOT MODIFY BEGIN]: Auto Configuration -->
+
+        <!-- AUTOMATIC GAE CONFIGURATION -->
+        <projectID>${appId}-${environmentID}</projectID>
+        <appVersion>1</appVersion>
+
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>

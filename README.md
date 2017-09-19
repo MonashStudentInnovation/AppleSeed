@@ -1,4 +1,8 @@
-# monPlan API Java 1.8
+SpringBoot Base for Google App Engine API
+
+<img src="https://3wks.com.au/wp-content/uploads/2017/08/3wks-logo-sticky.png" style="float: right"/>
+<img src="https://monplan-admin.firebaseapp.com/static/media/logo.8dfa6094.png" style="float: right", background-color: #006cab/>
+---
 This is the base for the API which is built on AppEngine Standard with Java 8 using SpringBoot.
 
 You can also read more about developing on this [here](DOCS.md)
@@ -6,7 +10,7 @@ You can also read more about developing on this [here](DOCS.md)
 ## Contributors
 Thanks to 3wks for the gae-tool and spring-boot-gae modules
 
-### Built by the monPlan DevOps and Backend Team:
+### Built by the [monPlan](https://github.com/monPlan) DevOps and Backend Team:
 
 | ![lorderikir](https://avatars3.githubusercontent.com/u/5687681?v=4&s=460)  | ![darvid7](https://avatars0.githubusercontent.com/u/11433468?v=4&s=460) | ![calytan](https://avatars1.githubusercontent.com/u/18413765?v=4&s=460)|
 | --------------| ----|---|
