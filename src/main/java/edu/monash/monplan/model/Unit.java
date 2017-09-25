@@ -3,15 +3,15 @@ package edu.monash.monplan.model;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
-import com.threewks.gaetools.search.SearchIndex;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.monplan.utils.TextSearch;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
-public class Unit {
+public class Unit extends DataModel {
+
+    public static final String nameField = "unitName";
+    public static final String codeField = "unitCode";
 
     @Id
     private String id;
@@ -19,15 +19,17 @@ public class Unit {
     @Index
     private String unitCode;
 
-    @SearchIndex
+    @Index
     private String unitName;
 
     private String description;
 
     @Index
     private Integer creditPoints;
+
     @Index
     private Integer scaBand;
+
     @Index
     private BigDecimal etfsl;
 
@@ -39,13 +41,17 @@ public class Unit {
 
     @Index
     private BigDecimal enjoyScore;
+
     @Index
     private BigDecimal learnScore;
 
-    public static class SearchFields {
-        public static final String UnitName = "careerNameSearchableText";
+    public String fetchCode() {
+        return unitCode;
     }
 
+    public String fetchName() {
+        return unitName;
+    }
 
     public String getId() {
         return id;
@@ -133,11 +139,6 @@ public class Unit {
 
     public void setLearnScore(BigDecimal learnScore) {
         this.learnScore = learnScore;
-    }
-
-    @SearchIndex
-    public String getCareerNameSearchableText() {
-        return TextSearch.getSearchableText(unitName);
     }
 
     public void init() {

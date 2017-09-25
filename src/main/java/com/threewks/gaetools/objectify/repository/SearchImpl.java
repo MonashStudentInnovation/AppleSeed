@@ -18,11 +18,7 @@
 package com.threewks.gaetools.objectify.repository;
 
 import com.googlecode.objectify.Key;
-import com.threewks.gaetools.search.Is;
-import com.threewks.gaetools.search.OrderComponent;
-import com.threewks.gaetools.search.QueryComponent;
-import com.threewks.gaetools.search.Result;
-import com.threewks.gaetools.search.Search;
+import com.threewks.gaetools.search.*;
 import com.threewks.gaetools.search.gae.SearchExecutor;
 
 import java.util.Collection;

@@ -3,21 +3,20 @@ package edu.monash.monplan.model;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
-import com.threewks.gaetools.search.SearchIndex;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.monplan.utils.TextSearch;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
-public class Course {
+public class Course extends DataModel {
+
+    public static String codeField = "courseCode";
+    public static String nameField = "courseName";
 
     @Id
     private String id;
 
     @Index
-    @SearchIndex
     private String courseCode;
 
     @Index
@@ -26,9 +25,14 @@ public class Course {
     @Index
     private String managingFaculty;
 
+    @Override
+    public String fetchCode() {
+        return courseCode;
+    }
 
-    public static class SearchFields {
-        public static final String CourseName = "courseNameSearchableText";
+    @Override
+    public String fetchName() {
+        return courseName;
     }
 
     public String getId() {
@@ -38,7 +42,6 @@ public class Course {
     public void setId(String id) {
         this.id = id;
     }
-
 
     public String getCourseCode() {
         return courseCode;
@@ -78,11 +81,6 @@ public class Course {
     public void init() {
         // Protects us from accidentally re-initialising an object that's retrieved from db
         this.setId(UUID.randomUUID().toString());
-    }
-
-    @SearchIndex
-    public String getCourseNameSearchableText() {
-        return TextSearch.getSearchableText(courseName);
     }
 
 }
