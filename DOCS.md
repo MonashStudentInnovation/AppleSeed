@@ -137,7 +137,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/Davids")
+@RequestMapping("/api/davids/")
 public class DavidController extends MonPlanController<David> {
 
     @Autowired
@@ -156,20 +156,20 @@ public class DavidController extends MonPlanController<David> {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity getDavidsByParams(@RequestParam(value="DavidCode", required=false) String[] DavidCodes,
-                                           @RequestParam(value="DavidName", required=false) String[] DavidNames) {
-        return this.getByParams(DavidCodes, DavidNames);
+    public ResponseEntity getDavidsByParams(@RequestParam(value="code", required=false) String[] codes,
+                                           @RequestParam(value="name", required=false) String[] names) {
+        return this.getByParams(codes, names);
     }
 
-    @RequestMapping(path = "/{DavidId}", method = RequestMethod.PUT)
-    public ResponseEntity updateDavidById(@PathVariable(value="DavidId") String DavidId,
+    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity updateDavidById(@PathVariable(value="id") String id,
                                          @RequestBody David David) {
-        return this.updateById(DavidId, David);
+        return this.updateById(id, David);
     }
 
-    @RequestMapping(path = "/{DavidId}", method = RequestMethod.DELETE)
-    public ResponseEntity updateDavidById(@PathVariable(value="DavidId") String DavidId) {
-        return this.deleteById(DavidId);
+    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity updateDavidById(@PathVariable(value="id") String id) {
+        return this.deleteById(id);
     }
 }
 
