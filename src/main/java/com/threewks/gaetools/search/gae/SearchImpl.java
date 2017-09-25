@@ -18,12 +18,7 @@
 package com.threewks.gaetools.search.gae;
 
 import com.atomicleopard.expressive.Expressive;
-import com.threewks.gaetools.search.Is;
-import com.threewks.gaetools.search.OrderComponent;
-import com.threewks.gaetools.search.QueryComponent;
-import com.threewks.gaetools.search.Result;
-import com.threewks.gaetools.search.Search;
-import com.threewks.gaetools.search.TextSearchService;
+import com.threewks.gaetools.search.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

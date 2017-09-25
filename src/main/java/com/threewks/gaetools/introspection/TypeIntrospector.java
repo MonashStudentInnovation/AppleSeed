@@ -21,12 +21,7 @@ import com.atomicleopard.expressive.Expressive;
 import jodd.util.ClassUtil;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Provides convenience methods for determining information about {@link Class} and {@link Type} objects.

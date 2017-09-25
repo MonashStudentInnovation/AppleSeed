@@ -4,12 +4,7 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.impl.translate.opt.joda.JodaTimeTranslators;
-import com.threewks.gaetools.objectify.transformers.DatastoreKeyToLongTransformer;
-import com.threewks.gaetools.objectify.transformers.DatastoreKeyToStringTransformer;
-import com.threewks.gaetools.objectify.transformers.KeyToLongTransformer;
-import com.threewks.gaetools.objectify.transformers.KeyToStringTransformer;
-import com.threewks.gaetools.objectify.transformers.StringToDatastoreKeyTransformer;
-import com.threewks.gaetools.objectify.transformers.StringToKeyTransformer;
+import com.threewks.gaetools.objectify.transformers.*;
 import com.threewks.gaetools.transformer.TransformerManager;
 
 public final class ObjectifyModule {

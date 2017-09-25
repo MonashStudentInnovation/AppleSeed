@@ -20,11 +20,7 @@ package com.threewks.gaetools.util;
 import com.threewks.gaetools.exception.BaseException;
 import jodd.io.FastByteArrayOutputStream;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 
 public class Streams {
     private static final String DefaultEncoding = "UTF-8";
