@@ -25,13 +25,14 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
     }
 
     private ApiInfo apiDocInfo() {
+        // you can update the configuration here
         ApiInfo apiInfo = new ApiInfo(
                 "My REST API",
                 "Some custom description of API.",
                 "v2",
                 "Terms of service",
                 "esol-monplan-ops-l@monash.edu",
-                "Closed",
+                "MIT",
                 "https://github.com/lorderikir/springboot-base-gae-java8/blob/master/LICENSE");
         return apiInfo;
     }
