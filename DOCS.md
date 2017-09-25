@@ -1,10 +1,52 @@
 # Developing for SpringBoot Java 8 on SpringBoot-Base-GAE-Java8
 
+## Initial Comment
 > In order to speed up development and allow faster fixes we have updated our Framework to have predefined Controllers and Services.
 
 ```
 Model < - > Repository < - > Service < - > Controller < - > SpringBoot < - > Frontend
 ```
+
+## Configuring MVN for GCP
+You will neded to edit `pom.xml`
+
+```xml
+    <groupId>springboot-base-gae-java8</groupId>
+    <artifactId>${groupId}</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <!-- [START]: CONFIGURATION Your Application Here-->
+        <appId>david-app</appId> <!-- CHANGE appID to appID-->
+        <environmentID>prod</environmentID>
+        <appVersion>1</appVersion>
+
+
+        <!-- {END] CONFIGURATION-->
+
+
+        <!-- [DO NOT MODIFY BEGIN]: Auto Configuration -->
+
+        <!-- AUTOMATIC GAE CONFIGURATION -->
+
+        <!--        project ID is automatically set to: 
+                            {appId}-{environmentID}
+                    so in GCP, the project is named the same
+                    for example monplan-frontend-dev
+                    is monPlan frontend Environment
+                                                                -->
+        <projectID>${appId}-${environmentID}</projectID>
+        <appVersion>1</appVersion>
+        <!-- TO BE CONTINUED -->
+    </properties>
+```
+
+**appID** needs to be changed to the main appengine project name <br/>
+**envrionmentID** is the environment type <br/>
+
+This is designed for an enterprise grade application which follows the convention: 
+_appId-environment_ for example, an app called `david-app`, within the prod enviromment it will be called `david-app-prod` within the Google Cloud Project.
 
 ## New Models
 
