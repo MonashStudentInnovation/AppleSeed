@@ -20,7 +20,7 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
-                .pathMapping("/api")
+                .pathMapping("/")
                 .apiInfo(apiDocInfo());
     }
 
