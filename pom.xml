@@ -3,22 +3,31 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>monplan-api-java8</groupId>
-    <artifactId>monplan-api-java8</artifactId>
+    <groupId>springboot-base-gae-java8</groupId>
+    <artifactId>${groupId}</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <!-- [START]: CONFIGURATION Your Application Here-->
-        <appId>monplan-api</appId>
+        <appId>monplan-api</appId> <!-- CHANGE appID to appID-->
         <environmentID>development</environmentID>
         <appVersion>1</appVersion>
+
+
         <!-- {END] CONFIGURATION-->
 
 
         <!-- [DO NOT MODIFY BEGIN]: Auto Configuration -->
 
         <!-- AUTOMATIC GAE CONFIGURATION -->
+
+        <!--        project ID is automatically set to: 
+                            {appId}-{environmentID}
+                    so in GCP, the project is named the same
+                    for example monplan-frontend-dev
+                    is monPlan frontend Environment
+                                                                -->
         <projectID>${appId}-${environmentID}</projectID>
         <appVersion>1</appVersion>
 
