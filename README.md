@@ -1,8 +1,9 @@
 SpringBoot Base for Google App Engine API
-
-<img src="https://3wks.com.au/wp-content/uploads/2017/08/3wks-logo-sticky.png" style="float: right"/>
-<img src="https://monplan-admin.firebaseapp.com/static/media/logo.8dfa6094.png" style="float: right", background-color: #006cab/>
+<img src="https://avatars2.githubusercontent.com/u/22784829?v=4" height="40em" style="float: right" />
 ---
+
+Current Version: `v0.2.0`
+
 This is the base for the API which is built on AppEngine Standard with Java 8 using SpringBoot.
 
 You can also read more about developing on this [here](DOCS.md)
