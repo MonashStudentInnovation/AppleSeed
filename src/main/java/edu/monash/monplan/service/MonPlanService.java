@@ -45,6 +45,10 @@ public class MonPlanService<T extends DataModel> {
     }
 
     public T create(T modelInstance) throws FailedOperationException {
+        return this.create(modelInstance, false);
+    }
+
+    public T create(T modelInstance, boolean allowDuplicateCodes) throws FailedOperationException {
         if (modelInstance.getId() != null) {
             if (this.repository.getById(modelInstance.getId()) != null) {
                 // Check if a model instance already has this id already exists in data layer.
@@ -52,7 +56,7 @@ public class MonPlanService<T extends DataModel> {
                         "CREATE operation failed: id %s is already in use.", modelInstance.getId()));
             }
         }
-        if (modelInstance.fetchCode() != null) {
+        if (!allowDuplicateCodes && modelInstance.fetchCode() != null) {
             if (this.repository.getByCode(modelInstance.fetchCode()).size() > 0) {
                 // Check if a model instance already has this code already exists in data layer.
                 throw new FailedOperationException(String.format(
@@ -70,7 +74,11 @@ public class MonPlanService<T extends DataModel> {
         return savedModel;
     }
 
-    public T updateById(T modelInstance) throws InsufficientResourcesException, NotFoundException {
+    public T updateById(T modelInstance) throws InsufficientResourcesException, NotFoundException, FailedOperationException {
+        return updateById(modelInstance, false);
+    }
+
+    public T updateById(T modelInstance, boolean allowDuplicateCodes) throws InsufficientResourcesException, NotFoundException, FailedOperationException {
         if (modelInstance.getId() == null) {
             throw new InsufficientResourcesException("UPDATE operation failed: id not provided.");
         }
@@ -79,6 +87,15 @@ public class MonPlanService<T extends DataModel> {
             throw new NotFoundException(String.format(
                     "UPDATE operation failed. id %s was not found in datastore.", modelInstance.getId()));
         }
+
+        if (!allowDuplicateCodes && modelInstance.fetchCode() != null) {
+            if (this.repository.getByCode(modelInstance.fetchCode()).size() > 0) {
+                // Check if a model instance already has this code already exists in data layer.
+                throw new FailedOperationException(String.format(
+                        "CREATE operation failed: code %s is already in use.", modelInstance.fetchCode()));
+            }
+        }
+
         // TODO: redo put?
         return this.repository.put(modelInstance);
     }
