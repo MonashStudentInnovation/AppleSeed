@@ -7,6 +7,7 @@
 Model < - > Repository < - > Service < - > Controller < - > SpringBoot < - > Frontend
 ```
 
+
 ## Configuring MVN for GCP
 You will neded to edit `pom.xml`
 
@@ -47,6 +48,12 @@ You will neded to edit `pom.xml`
 
 This is designed for an enterprise grade application which follows the convention: 
 _appId-environment_ for example, an app called `david-app`, within the prod enviromment it will be called `david-app-prod` within the Google Cloud Project.
+
+## Using MVN for Google App Engine
+
+To test locally you can run `mvn appengine:devserver` <br>
+To run a deployment run `mvn appengine:deploy` <br>
+If you cancel, the deployment using `Ctrl+C` you will have to _rollback_ the current changes before deploying a new update, this can be done using `mvn appengine:update`
 
 ## New Models
 
