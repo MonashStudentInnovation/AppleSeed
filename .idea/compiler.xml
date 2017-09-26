@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="monplan-api-java8" />
         <module name="springboot-base-gae-java8" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="monplan-api-java8" target="1.8" />
       <module name="springboot-base-gae-java8" target="1.8" />
     </bytecodeTargetLevel>
   </component>

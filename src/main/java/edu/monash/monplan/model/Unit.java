@@ -24,25 +24,18 @@ public class Unit extends DataModel {
 
     private String description;
 
-    @Index
     private Integer creditPoints;
 
-    @Index
     private Integer scaBand;
 
-    @Index
     private BigDecimal etfsl;
 
-    @Index
     private Integer enjoyResponse;
 
-    @Index
     private Integer learnResponse;
 
-    @Index
     private BigDecimal enjoyScore;
 
-    @Index
     private BigDecimal learnScore;
 
     public String fetchCode() {

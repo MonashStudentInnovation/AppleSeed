@@ -18,14 +18,20 @@ import java.util.Set;
 public class MonPlanController<T extends DataModel> {
 
     private final MonPlanService<T> service;
+    private boolean allowDuplicateCodes = false;
 
     public MonPlanController(MonPlanService<T> service) {
         this.service = service;
     }
 
+    public MonPlanController(MonPlanService<T> service, boolean allowDuplicateCodes) {
+        this.service = service;
+        this.allowDuplicateCodes = allowDuplicateCodes;
+    }
+
     ResponseEntity create(T modelInstance) {
         try {
-            return new ResponseEntity<>(this.service.create(modelInstance), HttpStatus.OK);
+            return new ResponseEntity<>(this.service.create(modelInstance, allowDuplicateCodes), HttpStatus.OK);
         } catch (FailedOperationException e) {
             return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
@@ -35,8 +41,8 @@ public class MonPlanController<T extends DataModel> {
         T match = service.getById(id);
         if (match == null) {
             return new ResponseEntity<>(
-                new ResponseMessage(
-                    String.format("GET operation failed. id %s not found in datastore.", id)),
+                    new ResponseMessage(
+                            String.format("GET operation failed. id %s not found in datastore.", id)),
                     HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(match, HttpStatus.OK);
@@ -83,7 +89,7 @@ public class MonPlanController<T extends DataModel> {
     ResponseEntity updateById(String id, T modelInstance) {
         try {
             modelInstance.setId(id);
-            service.updateById(modelInstance);
+            service.updateById(modelInstance, allowDuplicateCodes);
 
             // check if updateById was successful
             T instanceWithId = service.getById(id);
@@ -95,6 +101,8 @@ public class MonPlanController<T extends DataModel> {
             return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.NOT_FOUND);
         } catch (InsufficientResourcesException e) {
             return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.PRECONDITION_FAILED);
+        } catch (FailedOperationException e) {
+            return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -102,8 +110,8 @@ public class MonPlanController<T extends DataModel> {
         try {
             service.deleteById(id);
             return new ResponseEntity<>(
-                new ResponseMessage(
-                    String.format("DELETE operation success: id %s has been deleted", id)),
+                    new ResponseMessage(
+                            String.format("DELETE operation success: id %s has been deleted", id)),
                     HttpStatus.OK);
         } catch (NotFoundException e) {
             return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.NOT_FOUND);
