@@ -19,30 +19,7 @@ Thanks to 3wks for the gae-tool and spring-boot-gae modules
 ## Available Tools:
 - Custom Exceptions built on top of Springboot
 - GAE Tools by [3wks](https://github.com/3wks)
-- Swagger
-
-
-## Running
-
-Currently just running locally through terminal only
-
-```
-mvn appengine:devserver
-```
-
-You should also clean the package after fixing errors
-```
-mvn clean package
-```
-
-## Documentation
-We have included **springfox-swagger2** and **springfox-swagger-ui** as Repos, allowing you to document code automatically.
-
-To access the documentation locally visit: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
-
-### Units
-
-CRUD For Units and Courses Controller
+- Swagger (using SwaggerUI and Swagger Springfox)
 
 # Getting Started
 To get started just fork the [base repository](https://github.com/MonashUnitPlanner/springboot-base-gae-java8)
@@ -58,18 +35,25 @@ To get started just fork the [base repository](https://github.com/MonashUnitPlan
 ## Getting Started
 1. Start a Project on [Google Cloud Platform](https://console.cloud.google.com)
 2. Initialise an app on Google App Engine on Java, choose region and wait for initial setup services to finish
-3. [Change pom.xml so that the app meets to the app-id given by GCP.]
+3. [Change pom.xml so that the app meets to the app-id given by GCP.](#configuring-mvn-for-gcp)
 
 !> The **Free** Tier of Google App Engine has certain limits, for more _Google DataStore_ transactions perday, please get a paid tier.
 
 # Developing on SpringBoot-Base-GAE-Java8
 
-## Initial Comment
-> In order to speed up development and allow faster fixes we have updated our Framework to have predefined Controllers and Services.
+## Upgrade to Version 0.2 Notes
+?> In order to speed up development and allow faster fixes we have updated our Framework to have predefined Controllers and Services.
 
-```
-Model < - > Repository < - > Service < - > Controller < - > SpringBoot < - > Frontend
-```
+
+## How each class relates to another
+![https://i.imgur.com/rtfbJGu.png](https://i.imgur.com/rtfbJGu.png)
+
+| Class | Extends | Description |
+|-------|---------|-------------|
+| Model | _none_  | How the data model is structured also known as the _schema_ |
+| Repository | MonPlanRepository | The interface between the service and model, allows for searching to occur |
+| Service | MonPlanService | The difference methods that a 'user' can modify the DataStore (database) |
+| Controller | MonPlanController | The RESTful API calls (CRUD) that a _web client_ can call | 
 
 
 ## Configuring MVN for GCP
@@ -115,11 +99,9 @@ _appId-environment_ for example, an app called `david-app`, within the `prod` en
 
 ## Using MVN for Google App Engine
 
-To test locally you can run `mvn appengine:devserver` <br>
-To run a deployment run `mvn appengine:deploy` <br>
-If you cancel, the deployment using `Ctrl+C` you will have to _rollback_ the current changes before deploying a new update, this can be done using `mvn appengine:update`
+You can read more at [Using the Maven Google App Engine CLI](#using-the-maven-google-app-engine-cli) below.
 
-## New Models
+## Building a Google DataStore Model
 
 Each new **kind** for entity must follow the following model:
 
@@ -287,3 +269,33 @@ public class DavidController extends MonPlanController<David> {
 }
 
 ```
+
+# Tools
+## Using the Maven Google App Engine CLI
+
+To run and build a localised version of the app run:
+
+```
+mvn appengine:devserver
+```
+
+To deploy an application to **Google App Engine** execute:
+
+```
+mvn appengine:update
+```
+
+Sometimes, when you decide to cancel an _update_, you'll need to run:
+
+```
+mvn appengine:rollback
+```
+
+You should also clean the package after fixing errors
+```
+mvn clean package
+```
+## Using Swagger for Documentation
+We have included **springfox-swagger2** and **springfox-swagger-ui** as Repos, allowing you to document code automatically.
+
+To access the documentation locally visit: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
