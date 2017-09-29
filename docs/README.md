@@ -45,17 +45,22 @@ To access the documentation locally visit: [http://localhost:8080/swagger-ui.htm
 CRUD For Units and Courses Controller
 
 # Getting Started
-To get start just fork the [base repository](https://github.com/MonashUnitPlanner/springboot-base-gae-java8)
+To get started just fork the [base repository](https://github.com/MonashUnitPlanner/springboot-base-gae-java8)
 
 ## Prerequisites
 - [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 - [Apache Maven](https://maven.apache.org/download.cgi)
 - Java IDE, we recommend you use [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 
+!> You will need **JDK 1.8** as it is developed for Java 8 on Google Cloud Platform.
+
+
 ## Getting Started
 1. Start a Project on [Google Cloud Platform](https://console.cloud.google.com)
 2. Initialise an app on Google App Engine on Java, choose region and wait for initial setup services to finish
 3. [Change pom.xml so that the app meets to the app-id given by GCP.]
+
+!> The **Free** Tier of Google App Engine has certain limits, for more _Google DataStore_ transactions perday, please get a paid tier.
 
 # Developing on SpringBoot-Base-GAE-Java8
 
@@ -106,7 +111,7 @@ You will neded to edit `pom.xml`
 **envrionmentID** is the environment type <br/>
 
 This is designed for an enterprise grade application which follows the convention: 
-_appId-environment_ for example, an app called `david-app`, within the prod enviromment it will be called `david-app-prod` within the Google Cloud Project.
+_appId-environment_ for example, an app called `david-app`, within the `prod` enviromment it will be called `david-app-prod` within the Google Cloud Project.
 
 ## Using MVN for Google App Engine
 
