@@ -4,6 +4,11 @@
     <facet type="Spring" name="Spring">
       <configuration />
     </facet>
+    <facet type="google-app-engine" name="Google App Engine">
+      <configuration>
+        <sdk-home-path>$MAVEN_REPOSITORY$/com/google/appengine/appengine-java-sdk/1.9.54/appengine-java-sdk/appengine-java-sdk-1.9.54</sdk-home-path>
+      </configuration>
+    </facet>
     <facet type="web" name="Web">
       <configuration>
         <descriptors>
@@ -18,9 +23,6 @@
           <root url="file://$MODULE_DIR$/src/main/resources" />
         </sourceRoots>
       </configuration>
-    </facet>
-    <facet type="app-engine-standard" name="Google App Engine">
-      <configuration />
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
