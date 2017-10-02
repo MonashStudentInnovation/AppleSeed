@@ -4,6 +4,8 @@ SpringBoot Base for Google App Engine API
 
 Current Version: `v0.2.0`
 
+**Current Build Status**: ![status](https://circleci.com/gh/MonashUnitPlanner/springboot-base-gae-java8.png?circle-token=:circle-token)
+
 This is the base for the API which is built on AppEngine Standard with Java 8 using SpringBoot.
 
 You can also read more about developing on this [here](https://monashunitplanner.github.io/springboot-base-gae-java8/#/)
