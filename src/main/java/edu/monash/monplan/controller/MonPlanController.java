@@ -4,7 +4,7 @@ import edu.monash.monplan.controller.response.ResponseData;
 import edu.monash.monplan.controller.response.ResponseMessage;
 import edu.monash.monplan.model.DataModel;
 import edu.monash.monplan.service.MonPlanService;
-import org.monplan.InsufficientResourcesException;
+import org.monplan.exceptions.InsufficientResourcesException;
 import org.monplan.exceptions.FailedOperationException;
 import org.monplan.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
