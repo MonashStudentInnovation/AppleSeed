@@ -1,6 +1,6 @@
 <!-- _coverpage.md -->
 
-# SpringBoot-Bae-GAE-Java8 <small>Version 0.2</small>
+# SpringBoot-Base-GAE-Java8 <small>Version 0.2</small>
 
 ## An Optimized Spring Boot API Built on Top of Java 8 for Google App Engine
 
