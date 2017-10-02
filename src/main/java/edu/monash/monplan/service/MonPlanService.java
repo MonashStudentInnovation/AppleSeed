@@ -2,7 +2,7 @@ package edu.monash.monplan.service;
 
 import edu.monash.monplan.model.DataModel;
 import edu.monash.monplan.repository.MonPlanRepository;
-import org.monplan.InsufficientResourcesException;
+import org.monplan.exceptions.InsufficientResourcesException;
 import org.monplan.exceptions.FailedOperationException;
 import org.monplan.exceptions.NotFoundException;
 
