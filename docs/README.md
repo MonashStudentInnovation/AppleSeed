@@ -215,13 +215,15 @@ this is typically not **indexed** and should NOT be modified after creation.
 private String unitCode;
 ```
 
-The `@Index` annotation is used by datastore to call up, and use for searching and when _Google DataStore_ needs to access the entity/entry.
+The `@Index` annotation is used by datastore to call up, and use for searching and when _Google DataStore_ needs to access the entity/entry. Typically you index most attributes, but there is a **size limit of 1500 bytes** on some, so we suggest you don't index _descriptions_ of different objects, for example the description of a unit would exceed the size limit. (there is also a size limit of 1048487 bytes or 1 MB). 
+
+You can read more about Google DataStore limits [here](https://cloud.google.com/datastore/docs/concepts/limits)
 
 ##### @SearchIndex
 ```java
 @Index
 @SearchIndex
-private String careerName;
+private String unitName;
 ```
 
 The `@SearchIndex` is a unique annotation, used by the framework to provide searching functionality, which is used by _monPlan Repository_ and can be extended to provide Searching by substrings, substrings are created upon initialisation of the entity.
