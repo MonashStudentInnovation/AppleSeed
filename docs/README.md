@@ -103,6 +103,18 @@ _appId-environment_ for example, an app called `david-app`, within the `prod` en
 
 You can read more at [Using the Maven Google App Engine CLI](#using-the-maven-google-app-engine-cli) below.
 
+## Keywords (Glossary)
+
+### Google DataStore Definitions
+The following are definitions when building upon Google DataStore
+
+| Concept | Name in _Google DataStore_ | Name in a Relational Database |
+|------|------------|--------|
+| Category of Object | Kind | Table |
+| Entry/One Object | Entity | Row |
+| Individual Data for an Object | Property | Field | 
+| Unique ID (UID) for an Object | Key | Primary Key | 
+
 ## Building a Google DataStore Model
 
 Each new **kind** for entity must follow the following model:
@@ -186,6 +198,36 @@ public class David {
     }
 }
 ```
+
+#### Annotating Model Components
+##### @Id
+```java
+    @Id
+    private String id;
+```
+
+`@Id` is typically the UID or key, is used for identifying the entry using the key/name,
+this is typically not **indexed** and should NOT be modified after creation.
+
+##### @Index
+```java
+@Index
+private String unitCode;
+```
+
+The `@Index` annotation is used by datastore to call up, and use for searching and when _Google DataStore_ needs to access the entity/entry. Typically you index most attributes, but there is a **size limit of 1500 bytes** on some, so we suggest you don't index _descriptions_ of different objects, for example the description of a unit would exceed the size limit. (there is also a size limit of 1048487 bytes or 1 MB). 
+
+You can read more about Google DataStore limits [here](https://cloud.google.com/datastore/docs/concepts/limits)
+
+##### @SearchIndex
+```java
+@Index
+@SearchIndex
+private String unitName;
+```
+
+The `@SearchIndex` is a unique annotation, used by the framework to provide searching functionality, which is used by _monPlan Repository_ and can be extended to provide Searching by substrings, substrings are created upon initialisation of the entity.
+
 
 ### Making the Repository
 ```java
