@@ -48,11 +48,11 @@ To get started just fork the [base repository](https://github.com/MonashUnitPlan
 
 
 ## How each class relates to another
-![https://i.imgur.com/rtfbJGu.png](https://i.imgur.com/rtfbJGu.png)
+<img src="monplan_base_class_diagram.png" >
 
 | Class | Extends | Description |
 |-------|---------|-------------|
-| Model | _none_  | How the data model is structured also known as the _schema_ |
+| Model | DataModel  | How the data model is structured also known as the _schema_ |
 | Repository | MonPlanRepository | The interface between the service and model, allows for searching to occur |
 | Service | MonPlanService | The difference methods that a 'user' can modify the DataStore (database) |
 | Controller | MonPlanController | The RESTful API calls (CRUD) that a _web client_ can call | 

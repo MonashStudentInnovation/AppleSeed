@@ -14,7 +14,6 @@ public class MonPlanRepository<T extends DataModel> extends StringRepository<T> 
     // TODO: Make sure this works.
     public MonPlanRepository(Class<T> classType, SearchConfig searchConfig, String codeField, String nameField) {
         super(classType, searchConfig);
-
         this.codeField = codeField;
         this.nameField = nameField;
     }
@@ -46,10 +45,5 @@ public class MonPlanRepository<T extends DataModel> extends StringRepository<T> 
     // TODO: Remove?
     public T create(T modelInstance) {
         return this.put(modelInstance);
-    }
-
-
-    public T update(T modelInstance) {
-        return modelInstance;
     }
 }

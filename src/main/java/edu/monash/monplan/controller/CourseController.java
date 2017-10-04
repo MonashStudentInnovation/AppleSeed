@@ -15,6 +15,8 @@ public class CourseController extends MonPlanController<Course> {
         super(service);
     }
 
+    // @RequestBody will serialize the body of the POST request into a course object.
+    // Fields in the POST body that don't exist in course will not be taken and fields in course may be null.
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity createCourse(@RequestBody Course course) {
         return this.create(course);
@@ -40,7 +42,7 @@ public class CourseController extends MonPlanController<Course> {
     }
 
     @RequestMapping(path = "/{courseId}", method = RequestMethod.DELETE)
-    public ResponseEntity updateCourseById(@PathVariable(value="courseId") String courseId) {
+    public ResponseEntity deleteCourseById(@PathVariable(value="courseId") String courseId) {
         return this.deleteById(courseId);
     }
 }
