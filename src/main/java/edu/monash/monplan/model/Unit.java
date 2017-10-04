@@ -10,8 +10,8 @@ import java.util.UUID;
 @Entity
 public class Unit extends DataModel {
 
-    public static final String nameField = "unitName";
-    public static final String codeField = "unitCode";
+    public static String nameField = "unitName";
+    public static String codeField = "unitCode";
 
     @Id
     private String id;
