@@ -29,8 +29,10 @@ public class CourseController extends MonPlanController<Course> {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity getCoursesByParams(@RequestParam(value="courseCode", required=false) String[] courseCodes,
-                                             @RequestParam(value="courseName", required=false) String[] courseNames) {
-        return this.getByParams(courseCodes, courseNames);
+                                             @RequestParam(value="courseName", required=false) String[] courseNames,
+                                             @RequestParam(value="itemsPerPage", required=false) Integer itemsPerPage,
+                                             @RequestParam(value="pageNumber", required=false) Integer pageNumber) {
+        return this.getByParams(courseCodes, courseNames, itemsPerPage, pageNumber);
     }
 
     @RequestMapping(path = "/{courseId}", method = RequestMethod.PUT)

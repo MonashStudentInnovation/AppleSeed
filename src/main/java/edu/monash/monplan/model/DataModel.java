@@ -1,5 +1,7 @@
 package edu.monash.monplan.model;
 
+import java.util.UUID;
+
 public abstract class DataModel {
 
     /***
@@ -20,6 +22,9 @@ public abstract class DataModel {
     /**
      * Prevents accidentally re-initialising an object that is retrieved from the data layer.
      */
-    public abstract void init();
+    public void init() {
+        // Protects us from accidentally re-initialising an object that's retrieved from db
+        this.setId(UUID.randomUUID().toString());
+    }
 
 }

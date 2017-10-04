@@ -5,7 +5,6 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Entity
 public class Unit extends DataModel {
@@ -132,11 +131,6 @@ public class Unit extends DataModel {
 
     public void setLearnScore(BigDecimal learnScore) {
         this.learnScore = learnScore;
-    }
-
-    public void init() {
-        // Protects us from accidentally re-initialising an object that's retrieved from db
-        this.setId(UUID.randomUUID().toString());
     }
 
 }

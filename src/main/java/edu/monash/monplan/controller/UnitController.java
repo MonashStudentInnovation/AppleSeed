@@ -29,8 +29,10 @@ public class UnitController extends MonPlanController<Unit> {
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity getUnitsByParams(@RequestParam(value="unitCode", required=false) String[] unitCodes,
-                                           @RequestParam(value="unitName", required=false) String[] unitNames) {
-        return this.getByParams(unitCodes, unitNames);
+                                           @RequestParam(value="unitName", required=false) String[] unitNames,
+                                           @RequestParam(value="itemsPerPage", required=false) Integer itemsPerPage,
+                                           @RequestParam(value="pageNumber", required=false) Integer pageNumber) {
+        return this.getByParams(unitCodes, unitNames, itemsPerPage, pageNumber);
     }
 
     @RequestMapping(path = "/{unitId}", method = RequestMethod.PUT)

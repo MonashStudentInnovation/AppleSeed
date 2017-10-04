@@ -15,6 +15,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static java.lang.Integer.min;
+
 public class MonPlanController<T extends DataModel> {
 
     private final MonPlanService<T> service;
@@ -48,41 +50,65 @@ public class MonPlanController<T extends DataModel> {
         return new ResponseEntity<>(match, HttpStatus.OK);
     }
 
-    ResponseEntity getByParams(String[] codes, String[] names){
+    ResponseEntity getByParams(String[] codes, String[] names) {
+        return getByParams(codes, names, null, null);
+    }
+
+    ResponseEntity getByParams(String[] codes, String[] names, Integer itemsPerPage, Integer pageNumber){
         // If no params, simply list all.
+        List<T> results = new ArrayList<>();
         if (codes == null && names == null) {
-            return new ResponseEntity<>(new ResponseData(service.getAll()), HttpStatus.OK);
+            results = service.getAll();
+        } else {
+            // search by codes
+            Set<String> seenIds = new HashSet<>();
+            if (codes != null) {
+                // for each given code, find the matches for that
+                for (String code: codes) {
+                    List<T> matches = service.getByCode(code);
+                    // add matches if we have not seen them
+                    for (T match : matches) {
+                        if (!seenIds.contains(match.getId())) {
+                            results.add(match);
+                            seenIds.add(match.getId());
+                        }
+                    }
+                }
+            }
+            if (names != null) {
+                // for each given code, find the matches for that
+                for (String name : names) {
+                    List<T> matches = service.getByName(name);
+                    // add matches if we have not seen them
+                    for (T match : matches) {
+                        if (!seenIds.contains(match.getId())) {
+                            results.add(match);
+                            seenIds.add(match.getId());
+                        }
+                    }
+                }
+            }
         }
 
-        // search by codes
-        Set<String> seenIds = new HashSet<>();
-        List<T> results = new ArrayList<>();
-        if (codes != null) {
-            // for each given code, find the matches for that
-            for (String code: codes) {
-                List<T> matches = service.getByCode(code);
-                // add matches if we have not seen them
-                for (T match : matches) {
-                    if (!seenIds.contains(match.getId())) {
-                        results.add(match);
-                        seenIds.add(match.getId());
-                    }
-                }
+        // check if itemsPerPage and pageNumber was specified
+        if (itemsPerPage != null && pageNumber != null && pageNumber >= 1) {
+            // this means itemsPerPage and pageNumber was specified
+
+            int N = results.size();
+            int startIndex = (pageNumber-1)*itemsPerPage;
+            // we can simply limit endIndex to N
+            int endIndex = min(N, pageNumber*itemsPerPage);
+
+            // ensure that we do not access outside the list
+            if (startIndex >= N) {
+                return new ResponseEntity<>(new ResponseData(new ArrayList<>()), HttpStatus.OK);
             }
+
+            List<T> pagedResults = results.subList(startIndex, endIndex);
+
+            return new ResponseEntity<>(new ResponseData(pagedResults), HttpStatus.OK);
         }
-        if (names != null) {
-            // for each given code, find the matches for that
-            for (String name : names) {
-                List<T> matches = service.getByName(name);
-                // add matches if we have not seen them
-                for (T match : matches) {
-                    if (!seenIds.contains(match.getId())) {
-                        results.add(match);
-                        seenIds.add(match.getId());
-                    }
-                }
-            }
-        }
+
         return new ResponseEntity<>(new ResponseData(results), HttpStatus.OK);
     }
 
