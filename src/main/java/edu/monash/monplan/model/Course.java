@@ -5,8 +5,6 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.util.UUID;
-
 @Entity
 public class Course extends DataModel {
 
@@ -76,11 +74,6 @@ public class Course extends DataModel {
                 .append("courseName", courseName)
                 .append("managingFaculty", managingFaculty)
                 .toString();
-    }
-
-    public void init() {
-        // Protects us from accidentally re-initialising an object that's retrieved from db
-        this.setId(UUID.randomUUID().toString());
     }
 
 }

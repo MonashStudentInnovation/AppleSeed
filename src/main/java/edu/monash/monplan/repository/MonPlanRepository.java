@@ -52,8 +52,4 @@ public class MonPlanRepository<T extends DataModel> extends StringRepository<T> 
     public T update(T modelInstance) {
         return modelInstance;
     }
-
-    public List<T> getByPagination(List<T> model, int itemsPerPage, int pageNumber){
-        return model.subList((pageNumber - 1)*itemsPerPage, pageNumber*itemsPerPage);
-    }
 }
