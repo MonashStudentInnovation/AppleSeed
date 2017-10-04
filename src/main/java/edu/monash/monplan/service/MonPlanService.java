@@ -56,7 +56,9 @@ public class MonPlanService<T extends DataModel> {
                         "CREATE operation failed: id %s is already in use.", modelInstance.getId()));
             }
         }
+
         if (!allowDuplicateCodes && modelInstance.fetchCode() != null) {
+            // Check it does not already exist by code.
             if (this.repository.getByCode(modelInstance.fetchCode()).size() > 0) {
                 // Check if a model instance already has this code already exists in data layer.
                 throw new FailedOperationException(String.format(

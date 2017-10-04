@@ -14,7 +14,6 @@ public class MonPlanRepository<T extends DataModel> extends StringRepository<T> 
     // TODO: Make sure this works.
     public MonPlanRepository(Class<T> classType, SearchConfig searchConfig, String codeField, String nameField) {
         super(classType, searchConfig);
-
         this.codeField = codeField;
         this.nameField = nameField;
     }
@@ -48,12 +47,8 @@ public class MonPlanRepository<T extends DataModel> extends StringRepository<T> 
         return this.put(modelInstance);
     }
 
-
-    public T update(T modelInstance) {
-        return modelInstance;
-    }
-
     public List<T> getByPagination(List<T> model, int itemsPerPage, int pageNumber){
         return model.subList((pageNumber - 1)*itemsPerPage, pageNumber*itemsPerPage);
     }
+
 }

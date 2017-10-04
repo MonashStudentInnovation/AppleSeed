@@ -15,6 +15,8 @@ public class UnitController extends MonPlanController<Unit> {
         super(service);
     }
 
+    // @RequestBody will serialize the body of the POST request into a unit object.
+    // Fields in the POST body that don't exist in unit will not be taken and fields in unit may be null.
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity createUnit(@RequestBody Unit unit) {
         return this.create(unit);
@@ -38,7 +40,7 @@ public class UnitController extends MonPlanController<Unit> {
     }
 
     @RequestMapping(path = "/{unitId}", method = RequestMethod.DELETE)
-    public ResponseEntity updateUnitById(@PathVariable(value="unitId") String unitId) {
+    public ResponseEntity deleteUnitById(@PathVariable(value="unitId") String unitId) {
         return this.deleteById(unitId);
     }
 }
