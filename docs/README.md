@@ -388,6 +388,26 @@ To access the documentation locally visit: [http://localhost:8080/swagger-ui.htm
 
 When deployed to Google App Engine, your team's frontend developers can use this tool to see and play with how the routes are handled. It is accessible over `https://my-app-name.appspot.com/swagger-ui.html`
 
+### Configuring Swagger
+
+Displaying the page on how Swagger is configured is available as part of `SwaggerConfig.java` which is part of the `edu.monash.monplan.config` environment.
+
+To edit simply change the following section of the `SwaggerConfig.java` class.
+```java
+    private ApiInfo apiDocInfo() {
+        // you can update the configuration here
+        ApiInfo apiInfo = new ApiInfo(
+                "My REST API", 
+                "Some custom description of API.",
+                "v2",
+                "Terms of service",
+                "esol-monplan-ops-l@monash.edu",
+                "MIT",
+                "https://github.com/lorderikir/springboot-base-gae-java8/blob/master/LICENSE");
+        return apiInfo;
+    }
+```
+
 # Tips
 
 ## Use RESTful API Principles
