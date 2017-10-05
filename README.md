@@ -13,11 +13,7 @@ You can also read more about developing on this [here](https://monashunitplanner
 ## Contributors
 Thanks to 3wks for the gae-tool and spring-boot-gae modules
 
-### Built by the [monPlan](https://github.com/monPlan) DevOps and Backend Team:
-
-| ![lorderikir](https://avatars3.githubusercontent.com/u/5687681?v=4&s=460)  | ![darvid7](https://avatars0.githubusercontent.com/u/11433468?v=4&s=460) | ![calytan](https://avatars1.githubusercontent.com/u/18413765?v=4&s=460)|
-| --------------| ----|---|
-| [@lorderikir](github.com/lorderikir) | [@darvid7](github.com/darvid7) | [@callistusystan](github.com/callistusystan) |
+### Proudly Built by the [monPlan team](https://monashunitplanner.github.io)
 
 ## Available Tools:
 - Custom Exceptions built on top of Springboot
