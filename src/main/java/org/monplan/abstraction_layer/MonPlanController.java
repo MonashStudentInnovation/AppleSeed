@@ -1,6 +1,7 @@
 package org.monplan.abstraction_layer;
 
 import edu.monash.monplan.controller.response.ResponseData;
+import edu.monash.monplan.controller.response.ResponseDataWithPages;
 import edu.monash.monplan.controller.response.ResponseMessage;
 import org.monplan.exceptions.InsufficientResourcesException;
 import org.monplan.exceptions.FailedOperationException;
@@ -89,22 +90,14 @@ public class MonPlanController<T extends DataModel> {
         }
 
         // check if itemsPerPage and pageNumber was specified
-        if (itemsPerPage != null && pageNumber != null && pageNumber >= 1) {
-            // this means itemsPerPage and pageNumber was specified
-
-            int N = results.size();
-            int startIndex = (pageNumber-1)*itemsPerPage;
-            // we can simply limit endIndex to N
-            int endIndex = min(N, pageNumber*itemsPerPage);
-
-            // ensure that we do not access outside the list
-            if (startIndex >= N) {
-                return new ResponseEntity<>(new ResponseData(new ArrayList<>()), HttpStatus.OK);
+        if (itemsPerPage != null || pageNumber != null) {
+            try {
+                return new ResponseEntity<>(service.paginate(results, itemsPerPage, pageNumber), HttpStatus.OK);
+            } catch (InsufficientResourcesException e) {
+                return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.PRECONDITION_FAILED);
+            } catch (FailedOperationException e) {
+                return new ResponseEntity<>(new ResponseMessage(e.getMessage()), HttpStatus.BAD_REQUEST);
             }
-
-            List<T> pagedResults = results.subList(startIndex, endIndex);
-
-            return new ResponseEntity<>(new ResponseData(pagedResults), HttpStatus.OK);
         }
 
         return new ResponseEntity<>(new ResponseData(results), HttpStatus.OK);

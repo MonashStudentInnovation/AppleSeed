@@ -5,8 +5,6 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import org.monplan.abstraction_layer.DataModel;
 
-import java.math.BigDecimal;
-
 @Entity
 public class Unit extends DataModel {
 
@@ -28,15 +26,15 @@ public class Unit extends DataModel {
 
     private Integer scaBand;
 
-    private BigDecimal etfsl;
+    private double etfsl;
 
     private Integer enjoyResponse;
 
     private Integer learnResponse;
 
-    private BigDecimal enjoyScore;
+    private double enjoyScore;
 
-    private BigDecimal learnScore;
+    private double learnScore;
 
     public String fetchCode() {
         return unitCode;
@@ -94,11 +92,11 @@ public class Unit extends DataModel {
         this.scaBand = scaBand;
     }
 
-    public BigDecimal getEtfsl() {
+    public double getEtfsl() {
         return etfsl;
     }
 
-    public void setEtfsl(BigDecimal etfsl) {
+    public void setEtfsl(double etfsl) {
         this.etfsl = etfsl;
     }
 
@@ -118,19 +116,19 @@ public class Unit extends DataModel {
         this.learnResponse = learnResponse;
     }
 
-    public BigDecimal getEnjoyScore() {
+    public double getEnjoyScore() {
         return enjoyScore;
     }
 
-    public void setEnjoyScore(BigDecimal enjoyScore) {
+    public void setEnjoyScore(double enjoyScore) {
         this.enjoyScore = enjoyScore;
     }
 
-    public BigDecimal getLearnScore() {
+    public double getLearnScore() {
         return learnScore;
     }
 
-    public void setLearnScore(BigDecimal learnScore) {
+    public void setLearnScore(double learnScore) {
         this.learnScore = learnScore;
     }
 
