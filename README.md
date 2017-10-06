@@ -20,3 +20,16 @@ Thanks to 3wks for the gae-tool and spring-boot-gae modules
 - GAE Tools by [3wks](https://github.com/3wks)
 - Swagger
 
+## Security Tokens
+Security Tokens are automatically generated upon load with the username `user`, for example:
+``` 
+[INFO]
+[INFO] Using default security password: 712c1aa7-d7b6-4364-a4ac-a19c5aa47f3d
+[INFO]
+```
+
+Therefore you can do a HTTP Request with username:password
+for example:
+```
+user:712c1aa7-d7b6-4364-a4ac-a19c5aa47f3d
+```

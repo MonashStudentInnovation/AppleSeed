@@ -506,6 +506,21 @@ To edit simply change the following section of the `SwaggerConfig.java` class.
     }
 ```
 
+## Security Tokens
+Security Tokens are automatically generated upon load with the username `user`, for example:
+``` 
+[INFO]
+[INFO] Using default security password: 712c1aa7-d7b6-4364-a4ac-a19c5aa47f3d
+[INFO]
+```
+
+Therefore you can do a HTTP Request with username:password
+for example:
+```
+user:712c1aa7-d7b6-4364-a4ac-a19c5aa47f3d
+```
+
+
 # Tips
 
 ## Use RESTful API Principles
