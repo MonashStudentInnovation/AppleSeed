@@ -4,6 +4,7 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.monplan.abstraction_layer.DataModel;
 
 @Entity
 public class Course extends DataModel {

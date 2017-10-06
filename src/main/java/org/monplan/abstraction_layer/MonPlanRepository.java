@@ -1,8 +1,8 @@
-package edu.monash.monplan.repository;
+package org.monplan.abstraction_layer;
 
 import com.threewks.gaetools.objectify.repository.StringRepository;
 import com.threewks.gaetools.search.gae.SearchConfig;
-import edu.monash.monplan.model.DataModel;
+import org.monplan.abstraction_layer.DataModel;
 
 import java.util.List;
 

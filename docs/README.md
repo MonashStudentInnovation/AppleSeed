@@ -46,18 +46,6 @@ To get started just fork the [base repository](https://github.com/MonashUnitPlan
 ## Upgrade to Version 0.2 Notes
 ?> In order to speed up development and allow faster fixes we have updated our Framework to have predefined Controllers and Services.
 
-
-## How each class relates to another
-<img src="monplan_base_class_diagram.png" >
-
-| Class | Extends | Description |
-|-------|---------|-------------|
-| Model | DataModel  | How the data model is structured also known as the _schema_ |
-| Repository | MonPlanRepository | The interface between the service and model, allows for searching to occur |
-| Service | MonPlanService | The difference methods that a 'user' can modify the DataStore (database) |
-| Controller | MonPlanController | The RESTful API calls (CRUD) that a _web client_ can call | 
-
-
 ## Configuring MVN for GCP
 You will neded to edit `pom.xml`
 
@@ -115,6 +103,29 @@ The following are definitions when building upon Google DataStore
 | Individual Data for an Object | Property | Field | 
 | Unique ID (UID) for an Object | Key | Primary Key | 
 
+## How each class relates to another
+<img src="monplan_base_class_diagram.png" >
+
+| Class | Extends | Description |
+|-------|---------|-------------|
+| Model | DataModel  | How the data model is structured also known as the _schema_ |
+| Repository | MonPlanRepository | The interface between the service and model, allows for searching to occur |
+| Service | MonPlanService | The difference methods that a 'user' can modify the DataStore (database) |
+| Controller | MonPlanController | The RESTful API calls (CRUD) that a _web client_ can call | 
+
+[How to make use of model classes](#making-entities:-extending-dataModel)
+[Making the repository](#-making-the-repository)
+
+## Spring annotations used and meaning
+
+Taken from stackoverflow:
+
+| Annotation | Meaning                                             | does |
+|------------|-----------------------------------------------------|-----------------------------------------------------------------------------------|
+| @Repository| stereotype for persistence layer                    | Repository are the DAOs (Data Access Objects), they access the database directly. |
+| @Service   | stereotype for service layer                        | Service Hold business Logic, Calculations etc. |
+| @Controller| stereotype for presentation layer (spring-mvc)      | Controllers just do stuff like dispatching, forwarding, calling service methods etc. |
+
 ## Building a Google DataStore Model
 
 Each new **kind** for entity must follow the following model:
@@ -146,7 +157,7 @@ private void registerObjectifyEntities() {
 
 So we can wire this up.
 
-### Making the David.class Model
+### Making entities: Extending DataModel
 ```java
 package edu.monash.monplan.model;
 
@@ -156,10 +167,16 @@ import com.googlecode.objectify.annotation.Index;
 import com.threewks.gaetools.search.SearchIndex;
 
 @Entity
-public class David {
+public class David extends DataModel {
 
     @Id
-    private String id;
+    private String id;  // A UUID, we assign this ourselves.
+    
+    @Index
+    private String davidCode;  // A code that is assigned by business rules. For example for unit it could be FIT3077.
+
+    @Index
+    private String davidName; // A name that is assigned by business rules. For example for a unit it might be Software Engineering Architecture and Design.
 
     @Index
     private String fullName;
@@ -190,14 +207,14 @@ public class David {
         this.memes = memes;
     }
     
-    
-    
     public void init() {
         // Protects us from accidentally re-initialising an object that's retrieved from db
         this.setId(UUID.randomUUID().toString());
     }
 }
 ```
+
+Note: We usually access objects by their id which should be unique for all objects in datastore. 
 
 #### Annotating Model Components
 ##### @Id
@@ -206,7 +223,7 @@ public class David {
     private String id;
 ```
 
-`@Id` is typically the UID or key, is used for identifying the entry using the key/name,
+`@Id` is typically the UUID or key, is used for identifying the entry using the key/name,
 this is typically not **indexed** and should NOT be modified after creation.
 
 ##### @Index
@@ -246,14 +263,40 @@ public class DavidRepository extends MonPlanRepository<David> {
 }
 
 ```
+This is all that needs to be done for a repository!
 
+We take care of implementing the following in the superclass `MonPlanRepository` for a generic type `T ` that `extends DataModel`.
+In this case since we have a concrete class `David` which `extends DataModel`, we specify this in the angle brackets `<David>` which tells the superclass `MonPlanRepository` to treat all `T`s as `David`s.
+This means calling `getAll()` on `DavidRepository` will return a list of `David` objects `List<David>` making all the below methods usable.
+
+The searching is done through `StringRepository` which is part of 3weeks [thunder GAE](https://github.com/3wks/thundr-gae) framework which allows [thunder][https://github.com/3wks/thundr] (a lightweight, web MVC for java designed for cloud platforms) to run in a GAE environment.
+
+```java
+public class MonPlanRepository<T extends DataModel> extends StringRepository<T> {
+    ...
+    
+    public List<T> getAll()
+    
+    public List<T> getAll(int maxCount)
+    
+    public T getById(String id)
+    
+    public List<T> getByName(String name) 
+    
+    public List<T> getByCode(String code)
+    
+    public T create(T modelInstance)
+}
+```
+
+    
 ### Making the Service 
 
 ```java
 package edu.monash.monplan.service;
 
 import edu.monash.monplan.model.David;
-import edu.monash.monplan.repository.MonPlanRepository;
+import org.monplan.abstraction_layer.MonPlanRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -264,13 +307,44 @@ public class DavidService extends MonPlanService<David> {
     }
 }
 ```
+This is all that needs to be done for a service!
+
+`@Service` is an annotation which is part of Java's Spring framework. It handles the business logic. In our case we implement the following methods in `MonPlanService` making them available to `DavidService`.
+
+```java
+public class MonPlanService<T extends DataModel> {
+    ...
+    
+    public List<T> getByCode(String code)
+        
+    public List<T> getAll()
+    
+    public List<T> getAll(int maxCount)
+    
+    public List<T> getByName(String name)
+    
+    public T getById(String id)
+    
+    public T create(T modelInstance) throws FailedOperationException
+    
+    public T create(T modelInstance, boolean allowDuplicateCodes) throws FailedOperationException
+    
+    public T updateById(T modelInstance) throws InsufficientResourcesException, NotFoundException, FailedOperationException
+    
+    public T updateById(T modelInstance, boolean allowDuplicateCodes) throws InsufficientResourcesException, NotFoundException, FailedOperationException
+    
+    public void deleteById(String id) throws NotFoundException, FailedOperationException
+}
+```
+
+This handles interacting with the data persistence layer.
 
 ### Making The Controller
 ```java
 package edu.monash.monplan.controller;
 
 import edu.monash.monplan.model.David;
-import edu.monash.monplan.service.MonPlanService;
+import org.monplan.abstraction_layer.MonPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -313,6 +387,30 @@ public class DavidController extends MonPlanController<David> {
 }
 
 ```
+`@RestController` and `@RequestMapping` are part of Java Spring framework.
+
+In `MonPlanController` we implement the following.
+
+```java
+public class MonPlanController<T extends DataModel> {
+    ...
+    
+    ResponseEntity create(T modelInstance)
+    
+    ResponseEntity getById(String id)
+    
+    ResponseEntity getByParams(String[] codes, String[] names) 
+    
+    ResponseEntity getByParams(String[] codes, String[] names, Integer itemsPerPage, Integer pageNumber)
+    
+    ResponseEntity updateById(String id, T modelInstance)
+    
+    ResponseEntity<ResponseMessage> deleteById(String id)
+}
+```
+
+`ResponseEntity` is part of Java Spring's framework which is a REST template for HTTP responses.
+Since we have these methods we just call them in `DavidController` along with providing the path for the API endpoint and the HTTP methods allowed.
 
 # Building and Deploying a Single Paged Web Application
 The framework can also be used to build and deploying a Single paged web application, such SPWAs can include a _production build of a ReactJS_ application.

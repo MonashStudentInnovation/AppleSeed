@@ -1,4 +1,4 @@
-package edu.monash.monplan.model;
+package org.monplan.abstraction_layer;
 
 import java.util.UUID;
 
