@@ -1,12 +1,16 @@
 package org.monplan.abstraction_layer;
 
-import org.monplan.abstraction_layer.DataModel;
-import org.monplan.abstraction_layer.MonPlanRepository;
+import edu.monash.monplan.controller.response.ResponseDataWithPages;
 import org.monplan.exceptions.InsufficientResourcesException;
 import org.monplan.exceptions.FailedOperationException;
 import org.monplan.exceptions.NotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.Integer.min;
 
 public class MonPlanService<T extends DataModel> {
 
@@ -74,6 +78,36 @@ public class MonPlanService<T extends DataModel> {
             throw new FailedOperationException(String.format("CREATE operation failed: id %s could not be saved.", savedModel.getId()));
         }
         return savedModel;
+    }
+
+    public ResponseDataWithPages paginate(List<T> results, Integer itemsPerPage, Integer pageNumber) throws InsufficientResourcesException, FailedOperationException {
+        // if not both provided, return error message
+        if (itemsPerPage == null || pageNumber == null) {
+            throw new InsufficientResourcesException("GET operation failed: both itemsPerPage and pageNumber must be specified.");
+        }
+        if (itemsPerPage <= 0) {
+            throw new FailedOperationException("GET operation failed: itemsPerPage must be a positive integer");
+        }
+        if (pageNumber <= 0) {
+            throw new FailedOperationException("GET operation failed: pageNumber must be a positive integer.");
+        }
+
+        // this means itemsPerPage and pageNumber was specified
+        int N = results.size();
+        int startIndex = (pageNumber-1)*itemsPerPage;
+        // we can simply limit endIndex to N
+        int endIndex = min(N, pageNumber*itemsPerPage);
+
+        int totalPages = (N + itemsPerPage-1)/itemsPerPage;
+
+        // ensure that we do not access outside the list
+        if (startIndex >= N) {
+            return new ResponseDataWithPages(new ArrayList<>(), totalPages);
+        }
+
+        List<T> pagedResults = results.subList(startIndex, endIndex);
+
+        return new ResponseDataWithPages(pagedResults, totalPages);
     }
 
     public T updateById(T modelInstance) throws InsufficientResourcesException, NotFoundException, FailedOperationException {
