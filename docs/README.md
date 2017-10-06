@@ -313,7 +313,8 @@ This is all that needs to be done for a service!
 
 ```java
 public class MonPlanService<T extends DataModel> {
-        ...
+    ...
+    
     public List<T> getByCode(String code)
         
     public List<T> getAll()
