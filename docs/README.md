@@ -269,20 +269,24 @@ We take care of implementing the following in the superclass `MonPlanRepository`
 In this case since we have a concrete class `David` which `extends DataModel`, we specify this in the angle brackets `<David>` which tells the superclass `MonPlanRepository` to treat all `T`s as `David`s.
 This means calling `getAll()` on `DavidRepository` will return a list of `David` objects `List<David>` making all the below methods usable.
 
-The searching is done through `StringRepository` which is part of [3weeks thunder GEA framework](https://github.com/3wks/thundr-gae) which allows [thunder (lightweight, mvc, java designed for cloud)][https://github.com/3wks/thundr] to run in a GAE environment.
+The searching is done through `StringRepository` which is part of 3weeks [thunder GAE](https://github.com/3wks/thundr-gae) framework which allows [thunder][https://github.com/3wks/thundr] (a lightweight, web MVC for java designed for cloud platforms) to run in a GAE environment.
 
 ```java
-public List<T> getAll()
-
-public List<T> getAll(int maxCount)
-
-public T getById(String id)
-
-public List<T> getByName(String name) 
-
-public List<T> getByCode(String code)
-
-public T create(T modelInstance)
+public class MonPlanRepository<T extends DataModel> extends StringRepository<T> {
+    ...
+    
+    public List<T> getAll()
+    
+    public List<T> getAll(int maxCount)
+    
+    public T getById(String id)
+    
+    public List<T> getByName(String name) 
+    
+    public List<T> getByCode(String code)
+    
+    public T create(T modelInstance)
+}
 ```
 
     
@@ -308,25 +312,28 @@ This is all that needs to be done for a service!
 `@Service` is an annotation which is part of Java's Spring framework. It handles the business logic. In our case we implement the following methods in `MonPlanService` making them available to `DavidService`.
 
 ```java
-public List<T> getByCode(String code)
+public class MonPlanService<T extends DataModel> {
+        ...
+    public List<T> getByCode(String code)
+        
+    public List<T> getAll()
     
-public List<T> getAll()
-
-public List<T> getAll(int maxCount)
-
-public List<T> getByName(String name)
-
-public T getById(String id)
-
-public T create(T modelInstance) throws FailedOperationException
-
-public T create(T modelInstance, boolean allowDuplicateCodes) throws FailedOperationException
-
-public T updateById(T modelInstance) throws InsufficientResourcesException, NotFoundException, FailedOperationException
-
-public T updateById(T modelInstance, boolean allowDuplicateCodes) throws InsufficientResourcesException, NotFoundException, FailedOperationException
-
-public void deleteById(String id) throws NotFoundException, FailedOperationException
+    public List<T> getAll(int maxCount)
+    
+    public List<T> getByName(String name)
+    
+    public T getById(String id)
+    
+    public T create(T modelInstance) throws FailedOperationException
+    
+    public T create(T modelInstance, boolean allowDuplicateCodes) throws FailedOperationException
+    
+    public T updateById(T modelInstance) throws InsufficientResourcesException, NotFoundException, FailedOperationException
+    
+    public T updateById(T modelInstance, boolean allowDuplicateCodes) throws InsufficientResourcesException, NotFoundException, FailedOperationException
+    
+    public void deleteById(String id) throws NotFoundException, FailedOperationException
+}
 ```
 
 This handles interacting with the data persistence layer.
@@ -384,17 +391,21 @@ public class DavidController extends MonPlanController<David> {
 In `MonPlanController` we implement the following.
 
 ```java
-ResponseEntity create(T modelInstance)
-
-ResponseEntity getById(String id)
-
-ResponseEntity getByParams(String[] codes, String[] names) 
-
-ResponseEntity getByParams(String[] codes, String[] names, Integer itemsPerPage, Integer pageNumber)
-
-ResponseEntity updateById(String id, T modelInstance)
-
-ResponseEntity<ResponseMessage> deleteById(String id)
+public class MonPlanController<T extends DataModel> {
+    ...
+    
+    ResponseEntity create(T modelInstance)
+    
+    ResponseEntity getById(String id)
+    
+    ResponseEntity getByParams(String[] codes, String[] names) 
+    
+    ResponseEntity getByParams(String[] codes, String[] names, Integer itemsPerPage, Integer pageNumber)
+    
+    ResponseEntity updateById(String id, T modelInstance)
+    
+    ResponseEntity<ResponseMessage> deleteById(String id)
+}
 ```
 
 `ResponseEntity` is part of Java Spring's framework which is a REST template for HTTP responses.
