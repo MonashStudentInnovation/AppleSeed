@@ -4,8 +4,6 @@ import edu.monash.monplan.controller.response.ResponseDataWithPages;
 import org.monplan.exceptions.InsufficientResourcesException;
 import org.monplan.exceptions.FailedOperationException;
 import org.monplan.exceptions.NotFoundException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
