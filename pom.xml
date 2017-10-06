@@ -10,8 +10,8 @@
 
     <properties>
         <!-- [START]: CONFIGURATION Your Application Here-->
-        <appId>monplan-api</appId> <!-- CHANGE appID to appID-->
-        <environmentID>development</environmentID>
+        <appId>monplan-api-au</appId> <!-- CHANGE appID to appID-->
+        <environmentID>prod</environmentID>
         <appVersion>1</appVersion>
 
 
@@ -178,6 +178,11 @@
             <scope>test</scope>
         </dependency>
         <!-- end::tests[] -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 
         <!--<dependency>-->
             <!--<groupId>com.auth0</groupId>-->
