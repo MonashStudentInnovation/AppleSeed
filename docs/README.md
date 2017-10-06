@@ -296,7 +296,7 @@ public class MonPlanRepository<T extends DataModel> extends StringRepository<T> 
 package edu.monash.monplan.service;
 
 import edu.monash.monplan.model.David;
-import edu.monash.monplan.repository.MonPlanRepository;
+import org.monplan.abstraction_layer.MonPlanRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -344,7 +344,7 @@ This handles interacting with the data persistence layer.
 package edu.monash.monplan.controller;
 
 import edu.monash.monplan.model.David;
-import edu.monash.monplan.service.MonPlanService;
+import org.monplan.abstraction_layer.MonPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -2,6 +2,7 @@ package edu.monash.monplan.repository;
 
 import com.threewks.gaetools.search.gae.SearchConfig;
 import edu.monash.monplan.model.Course;
+import org.monplan.abstraction_layer.MonPlanRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository

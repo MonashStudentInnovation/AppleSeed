@@ -1,7 +1,8 @@
 package edu.monash.monplan.controller;
 
 import edu.monash.monplan.model.Unit;
-import edu.monash.monplan.service.MonPlanService;
+import org.monplan.abstraction_layer.MonPlanService;
+import org.monplan.abstraction_layer.MonPlanController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

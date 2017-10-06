@@ -1,7 +1,7 @@
-package edu.monash.monplan.service;
+package org.monplan.abstraction_layer;
 
-import edu.monash.monplan.model.DataModel;
-import edu.monash.monplan.repository.MonPlanRepository;
+import org.monplan.abstraction_layer.DataModel;
+import org.monplan.abstraction_layer.MonPlanRepository;
 import org.monplan.exceptions.InsufficientResourcesException;
 import org.monplan.exceptions.FailedOperationException;
 import org.monplan.exceptions.NotFoundException;

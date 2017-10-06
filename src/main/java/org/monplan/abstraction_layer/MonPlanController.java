@@ -1,9 +1,7 @@
-package edu.monash.monplan.controller;
+package org.monplan.abstraction_layer;
 
 import edu.monash.monplan.controller.response.ResponseData;
 import edu.monash.monplan.controller.response.ResponseMessage;
-import edu.monash.monplan.model.DataModel;
-import edu.monash.monplan.service.MonPlanService;
 import org.monplan.exceptions.InsufficientResourcesException;
 import org.monplan.exceptions.FailedOperationException;
 import org.monplan.exceptions.NotFoundException;
@@ -31,7 +29,7 @@ public class MonPlanController<T extends DataModel> {
         this.allowDuplicateCodes = allowDuplicateCodes;
     }
 
-    ResponseEntity create(T modelInstance) {
+    public ResponseEntity create(T modelInstance) {
         try {
             return new ResponseEntity<>(this.service.create(modelInstance, allowDuplicateCodes), HttpStatus.OK);
         } catch (FailedOperationException e) {
@@ -39,7 +37,7 @@ public class MonPlanController<T extends DataModel> {
         }
     }
 
-    ResponseEntity getById(String id) {
+    public ResponseEntity getById(String id) {
         T match = service.getById(id);
         if (match == null) {
             return new ResponseEntity<>(
@@ -50,11 +48,11 @@ public class MonPlanController<T extends DataModel> {
         return new ResponseEntity<>(match, HttpStatus.OK);
     }
 
-    ResponseEntity getByParams(String[] codes, String[] names) {
+    public ResponseEntity getByParams(String[] codes, String[] names) {
         return getByParams(codes, names, null, null);
     }
 
-    ResponseEntity getByParams(String[] codes, String[] names, Integer itemsPerPage, Integer pageNumber){
+    public ResponseEntity getByParams(String[] codes, String[] names, Integer itemsPerPage, Integer pageNumber){
         // If no params, simply list all.
         List<T> results = new ArrayList<>();
         if (codes == null && names == null) {
@@ -112,7 +110,7 @@ public class MonPlanController<T extends DataModel> {
         return new ResponseEntity<>(new ResponseData(results), HttpStatus.OK);
     }
 
-    ResponseEntity updateById(String id, T modelInstance) {
+    public ResponseEntity updateById(String id, T modelInstance) {
         try {
             modelInstance.setId(id);
             service.updateById(modelInstance, allowDuplicateCodes);
@@ -132,7 +130,7 @@ public class MonPlanController<T extends DataModel> {
         }
     }
 
-    ResponseEntity<ResponseMessage> deleteById(String id){
+    public ResponseEntity<ResponseMessage> deleteById(String id){
         try {
             service.deleteById(id);
             return new ResponseEntity<>(
