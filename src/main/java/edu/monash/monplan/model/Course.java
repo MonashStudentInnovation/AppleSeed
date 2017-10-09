@@ -3,7 +3,6 @@ package edu.monash.monplan.model;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.monplan.abstraction_layer.DataModel;
 
 @Entity
@@ -64,17 +63,6 @@ public class Course extends DataModel {
 
     public void setManagingFaculty(String managingFaculty) {
         this.managingFaculty = managingFaculty;
-    }
-
-
-    @Override
-    public String toString() {
-
-        return new ToStringBuilder(this)
-                .append("courseCode", courseCode)
-                .append("courseName", courseName)
-                .append("managingFaculty", managingFaculty)
-                .toString();
     }
 
 }

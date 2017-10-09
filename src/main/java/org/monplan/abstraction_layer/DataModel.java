@@ -1,5 +1,8 @@
 package org.monplan.abstraction_layer;
 
+import com.threewks.gaetools.search.SearchIndex;
+import org.monplan.utils.TextSearch;
+
 import java.util.UUID;
 
 public abstract class DataModel {
@@ -25,6 +28,11 @@ public abstract class DataModel {
     public void init() {
         // Protects us from accidentally re-initialising an object that's retrieved from db
         this.setId(UUID.randomUUID().toString());
+    }
+
+    @SearchIndex
+    public String getSearchableText() {
+        return TextSearch.getSearchableText(fetchName());
     }
 
 }
