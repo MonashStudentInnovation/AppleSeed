@@ -1,6 +1,5 @@
 package org.monplan.abstraction_layer;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.threewks.gaetools.search.SearchIndex;
 import org.monplan.utils.TextSearch;
 
@@ -31,10 +30,9 @@ public abstract class DataModel {
         this.setId(UUID.randomUUID().toString());
     }
 
-    @JsonIgnore
     @SearchIndex
     public String getSearchableText() {
-        return TextSearch.getSearchableText("searchableText");
+        return TextSearch.getSearchableText(fetchName());
     }
 
 }

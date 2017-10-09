@@ -3,7 +3,9 @@ package edu.monash.monplan.model;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
+import com.threewks.gaetools.search.SearchIndex;
 import org.monplan.abstraction_layer.DataModel;
+import org.monplan.utils.TextSearch;
 
 @Entity
 public class Unit extends DataModel {
