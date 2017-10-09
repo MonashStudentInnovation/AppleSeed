@@ -25,4 +25,13 @@
     <system-properties>
         <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
     </system-properties>
+    <automatic-scaling>
+        <min-idle-instances>5</min-idle-instances>
+        <!-- ‘automatic’ is the default value. -->
+        <max-idle-instances>automatic</max-idle-instances>
+        <!-- ‘automatic’ is the default value. -->
+        <min-pending-latency>30ms</min-pending-latency>
+        <max-pending-latency>automatic</max-pending-latency>
+        <max-concurrent-requests>50</max-concurrent-requests>
+    </automatic-scaling>
 </appengine-web-app>
