@@ -1,6 +1,5 @@
-SpringBoot Base for Google App Engine API
-<img src="https://avatars2.githubusercontent.com/u/22784829?v=4" height="40em" style="float: right" />
----
+
+<span style="display:block;text-align:center">![logo](https://i.imgur.com/aQ0vG9K.png)</span>
 
 Current Version: `v0.2.0`
 
