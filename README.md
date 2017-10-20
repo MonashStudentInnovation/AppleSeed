@@ -1,5 +1,8 @@
+<p align="center">
+  <img width="200" src="https://i.imgur.com/aQ0vG9K.png">
+</p>
 
-<span style="display:block;text-align:center">![logo](https://i.imgur.com/aQ0vG9K.png)</span>
+<hr>
 
 Current Version: `v0.2.0`
 
