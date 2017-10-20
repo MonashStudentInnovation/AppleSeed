@@ -4,10 +4,18 @@
 
 <hr>
 
+# Status
 Current Version: `v0.2.0`
 
 **Current Build Status**: ![status](https://circleci.com/gh/monPlan/springboot-base-gae-java8.png?circle-token=:circle-token)
 
+# Why AppleSeed as the name?
+
+Our Applet or App (APP-le, get it?) is the foundation of our code, it is designed around SpringBoot. We believe in letting you code on this framework will be awesome, Apples grow into a huge tree during the Spring. 
+
+
+
+# Introduction
 This is the base for the API which is built on AppEngine Standard with Java 8 using SpringBoot.
 
 You can also read more about developing on this [here](https://monplan.github.io/springboot-base-gae-java8/#/)
