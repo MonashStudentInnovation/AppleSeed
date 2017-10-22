@@ -11,7 +11,7 @@ Current Version: `v0.2.0`
 
 # Why AppleSeed as the name?
 
-Our Applet or App (APP-le, get it?) is the foundation of our code, it is designed around SpringBoot. We believe in letting you code on this framework will be awesome! Seeds :seedling: grow into a huge tree during the Spring :evergreen_tree:. 
+Our Applet or App (APP-le, get it?) is the foundation of our code, it is designed around SpringBoot. We believe in letting you code on this framework will be awesome! :seedling: Seeds grow into a huge tree during the Spring :evergreen_tree:. 
 
 
 
