@@ -5,7 +5,15 @@
 <hr>
 
 # Status
-Current Version: `v0.2.0`
+[![license](https://img.shields.io/github/license/monPlan/AppleSeed.svg)](https://github.com/monPlan/AppleSeed)
+[![GitHub contributors](https://img.shields.io/github/contributors/monPlan/AppleSeed.svg)](https://github.com/monPlan/AppleSeed)
+[![GitHub last commit](https://img.shields.io/github/last-commit/monPlan/AppleSeed.svg)](https://github.com/monPlan/AppleSeed)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/monPlan/AppleSeed.svg)](https://github.com/monPlan/AppleSeed)
+[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/monPlan/AppleSeed.svg)](https://github.com/monPlan/AppleSeed)
+
+**Current Version**: [![GitHub release](https://img.shields.io/github/release/monPlan/AppleSeed.svg)](https://github.com/monPlan/AppleSeed/releases/latest)
+
+**Latest Pre-Release**: [![GitHub (pre-)release](https://img.shields.io/github/release/monPlan/AppleSeed/all.svg)](https://github.com/monPlan/AppleSeed/releases)
 
 **Current Build Status**: ![status](https://circleci.com/gh/monPlan/springboot-base-gae-java8.png?circle-token=:circle-token)
 
