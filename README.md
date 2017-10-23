@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="200" src="https://i.imgur.com/aQ0vG9K.png">
+  <img width="150" src="https://i.imgur.com/aQ0vG9K.png">
 </p>
 
 <hr>
@@ -10,6 +10,7 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/monPlan/AppleSeed.svg)](https://github.com/monPlan/AppleSeed)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/monPlan/AppleSeed.svg)](https://github.com/monPlan/AppleSeed)
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/monPlan/AppleSeed.svg)](https://github.com/monPlan/AppleSeed)
+[![Github commits (since latest release)](https://img.shields.io/github/commits-since/monPlan/AppleSeed/latest.svg)](https://github.com/monPlan/AppleSeed)
 
 **Current Version**: [![GitHub release](https://img.shields.io/github/release/monPlan/AppleSeed.svg)](https://github.com/monPlan/AppleSeed/releases/latest)
 
