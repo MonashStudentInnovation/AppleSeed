@@ -1,8 +1,10 @@
 package edu.monash.monplan.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -13,6 +15,16 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig extends WebMvcConfigurerAdapter {
+
+    @Value("${spring.application.version}")
+    private String applicationVersion;
+    @Value("${spring.application.title}")
+    private String applicationTitle;
+    @Value("${spring.application.description}")
+    private String applicationDescription;
+    @Value("${spring.application.contact}")
+    private String applicationContact;
+
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -26,14 +38,15 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
 
     private ApiInfo apiDocInfo() {
         // you can update the configuration here
-        ApiInfo apiInfo = new ApiInfo(
-                "My REST API",
-                "Some custom description of API.",
-                "v2",
-                "Terms of service",
-                "esol-monplan-ops-l@monash.edu",
-                "MIT",
-                "https://github.com/lorderikir/springboot-base-gae-java8/blob/master/LICENSE");
+        ApiInfo apiInfo = new ApiInfoBuilder()
+                .title(applicationTitle)
+                .description(applicationDescription)
+                .version(applicationVersion)
+                //.termsOfServiceUrl("Terms of service")
+                .contact(applicationContact)
+                .license("MIT")
+                .licenseUrl("https://github.com/lorderikir/springboot-base-gae-java8/blob/master/LICENSE")
+                .build();
         return apiInfo;
     }
 }
