@@ -36,7 +36,7 @@ Thanks to 3wks for the gae-tool and spring-boot-gae modules
 
 ## Contributing
 
-Before contributing, please be sure that you have read our [Code of Conduct](https://github.com/NickelOz/AppleSeed/tree/master/.github/CODE_OF_CONDUCT.md).
+Before contributing, please be sure that you have read our [Code of Conduct](https://github.com/monPlan/AppleSeed/tree/master/.github/CODE_OF_CONDUCT.md).
 
 A setup guide can be found in our development guide, [here](https://monplan.github.io/AppleSeed/#/?id=getting-started).
 
