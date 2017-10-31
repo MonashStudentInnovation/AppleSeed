@@ -34,6 +34,12 @@ Thanks to 3wks for the gae-tool and spring-boot-gae modules
 
 ### Proudly Built by the [monPlan team](https://monashunitplanner.github.io)
 
+## Contributing
+
+Before contributing, please be sure that you have read our [Code of Conduct](https://github.com/monPlan/AppleSeed/tree/master/.github/CODE_OF_CONDUCT.md).
+
+A setup guide can be found in our development guide, [here](https://monplan.github.io/AppleSeed/#/?id=getting-started).
+
 ## Available Tools:
 - Custom Exceptions built on top of Springboot
 - GAE Tools by [3wks](https://github.com/3wks)
