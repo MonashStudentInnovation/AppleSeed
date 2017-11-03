@@ -14,6 +14,10 @@ public class MonPlanService<T extends DataModel> {
 
     private final MonPlanRepository<T> repository;
 
+    public MonPlanRepository<T> getRepository() {
+        return repository;
+    }
+
     public MonPlanService(MonPlanRepository<T> repository) {
         this.repository = repository;
     }

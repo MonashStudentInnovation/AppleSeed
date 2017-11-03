@@ -30,6 +30,10 @@ public class MonPlanController<T extends DataModel> {
         this.allowDuplicateCodes = allowDuplicateCodes;
     }
 
+    public MonPlanService<T> getService() {
+        return service;
+    }
+
     public ResponseEntity create(T modelInstance) {
         try {
             return new ResponseEntity<>(this.service.create(modelInstance, allowDuplicateCodes), HttpStatus.OK);
