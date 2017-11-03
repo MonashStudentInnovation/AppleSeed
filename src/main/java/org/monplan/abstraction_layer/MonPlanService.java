@@ -18,6 +18,10 @@ public class MonPlanService<T extends DataModel> {
         this.repository = repository;
     }
 
+    public MonPlanRepository<T> getRepository() {
+        return this.repository;
+    }
+
     public List<T> getByCode(String code) {
         return this.repository.getByCode(code);
     }
