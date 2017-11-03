@@ -4,17 +4,19 @@
 <!-- How does this issue impact you and what you are trying to accomplish? -->
 <!-- This can help us come up with the most useful solution for our users -->
 
-
+## System Details
+- **Operating System**: <!--The Operating System that you encoutred this bug on -->
+- **Operating System Version**: 
+- **Java Version**:
+- **Maven Version**:
+- **IDE**: <!-- IntelliJ IDEA/Eclipse -->
+- **Error Message**: 
 
 ## Expected Behavior
 <!-- Tell us what should happen -->
 
-
-
 ## Current Behavior
 <!-- Tell us what happens instead of the expected behavior -->
-
-
 
 ## Reproduction
 <!-- Tell us how this bug occured and be recreated. This can be done in several ways -->
@@ -27,8 +29,6 @@
 3.
 
 <!-- If there are any relevant details about your working environment, please list them here -->
-
-
 
 ## Possible Solution/s
 <!-- If you have any recommendations or ideas, please tell us how these could be implemented -->
