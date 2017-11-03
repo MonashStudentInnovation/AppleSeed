@@ -4,7 +4,12 @@
 <!-- How does this issue impact you and what you are trying to accomplish? -->
 <!-- This can help us come up with the most useful solution for our users -->
 
-
+## System Details
+- **Operating System**: <!--The Operating System that you encoutred this bug on -->
+- **Operating System Version**: 
+- **Dependcies**: 
+- **IDE**: <!-- IntelliJ IDEA/Eclipse -->
+- **Error Message**: 
 
 ## Expected Behavior
 <!-- Tell us what should happen -->
@@ -33,3 +38,4 @@
 ## Possible Solution/s
 <!-- If you have any recommendations or ideas, please tell us how these could be implemented -->
 <!-- Be sure to provide a detailed description of any changes or additions you are proposing -->
+
