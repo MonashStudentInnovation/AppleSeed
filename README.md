@@ -49,12 +49,13 @@ A setup guide can be found in our development guide, [here](https://monplan.gith
 A quick guide to getting up and running asap locally.
 
 ### Table of Contents  
-[Set up](#1.-Clone-project-and-open-in-IntelliJ)  
-[Running backend](#Run-the-backend) 
-[Accessing backend](#3.-Accessing-the-backend) 
-[Posting data](#4.-Posting-data) 
-[Getting data](#5.-Getting-data)
-[Admin console](#6.-Admin-console)
+1. [Set up](#1.-Clone-project-and-open-in-IntelliJ)  
+2. [Running backend](#Run-the-backend) 
+3. [Accessing backend](#3.-Accessing-the-backend) 
+4. [Posting data](#4.-Posting-data) 
+5. [Getting data](#5.-Getting-data)
+6. [Admin console](#6.-Admin-console)
+
 ### 1. Set up project and open in IntelliJ
 
 Fork the project into your own repository and clone it. 
