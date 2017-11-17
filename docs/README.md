@@ -35,6 +35,9 @@ To get started just fork the [base repository](https://github.com/MonashUnitPlan
 
 
 ## Getting Started
+
+Note: Quickstart guide [here](https://github.com/monplan/AppleSeed/tree/docs-update#quick-start)
+
 1. Start a Project on [Google Cloud Platform](https://console.cloud.google.com)
 2. Initialise an app on Google App Engine on Java, choose region and wait for initial setup services to finish
 3. [Change pom.xml so that the app meets to the app-id given by GCP.](#configuring-mvn-for-gcp)
