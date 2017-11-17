@@ -49,20 +49,19 @@ A setup guide can be found in our development guide, [here](https://monplan.gith
 A quick guide to getting up and running asap locally.
 
 ### Table of Contents  
-1. [Set up](#1-Clone-project-and-open-in-IntelliJ)  
-2. [Running backend](#2-Run-the-backend) 
-3. [Accessing backend](#3-Accessing-the-backend) 
-4. [Posting data](#4-Posting-data) 
-5. [Getting data](#5-Getting-data)
-6. [Admin console](#6-Admin-console)
-
-### 1 Set up project and open in IntelliJ
+1. [Set up](#1.-clone-project-and-open-in-intelliJ)  
+2. [Running backend](#run-the-backend) 
+3. [Accessing backend](#3.-accessing-the-backend) 
+4. [Posting data](#4.-posting-data) 
+5. [Getting data](#5.-getting-data)
+6. [Admin console](#6.-admin-console)
+### 1. Set up project and open in IntelliJ
 
 Fork the project into your own repository and clone it. 
 
 If IntelliJ prompts you to import resources from maven say yes
 
-### 2 Run the backend
+### 2. Run the backend
 
 Run `mvn appengine:devserver` on command line in the project directory.
 This will build the project and start the server. 
@@ -97,12 +96,12 @@ The important things here are the:
 - `security password`: You need this to get access to the application, in this case it is `3c94bb67-bd2e-41b2-9fe8-9c3d8c86ed54` 
 - `port number`: This is the address of your service.
 
-### 3 Accessing the backend
+### 3. Accessing the backend
 
 Going to `http://localhost:8080/` you will be prompted to authenticate, enter 'user' as the username and the security password for password.
 Once you have authenticate you will see a `404 error` as the route has not been mapped.
 
-### 4 Posting data
+### 4. Posting data
 
 To post data to the backend use a tool like [Postman](https://www.getpostman.com/).
 For example if I want to add a new unit I would do something like this.
@@ -132,7 +131,7 @@ corresponding fields will be given the value in the JSON object, missing fields 
 
 Note: If you do not provide an `id` we will create one for you using `UUID`.
 
-### 5 Getting data
+### 5. Getting data
 
 To get data use HTTP GET on the endpoint. For example if I want to get unit data I would do a get to `http://localhost:8080/api/units`.
 
@@ -142,7 +141,7 @@ This can be done on the web browser or in Postman, if you are using Postman reme
 
 You can make requests for all CRUD (create, read, update, delete) functionality defined in controller classes. 
 
-### 6 Admin console
+### 6. Admin console
 
 Appending `_ah/admin` to your url you can access GAE's admin console allowing you to manipulate what is in your local datastore.
 
