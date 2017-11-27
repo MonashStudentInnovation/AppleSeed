@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 import java.util.Arrays;
 
 @Configuration
-public class ObjectifyConfig {
+public class ObjectifyConfig implements ServletContextListener {
 
     @PostConstruct
     public void init() {
@@ -25,6 +25,16 @@ public class ObjectifyConfig {
     private void register(Class<?>... entityClasses) {
         Arrays.stream(entityClasses)
                 .forEach(ObjectifyService::register);
+    }
+    
+    @Override
+    public void contextInitialized(ServletContextEvent servletContextEvent) {
+        registerObjectifyEntities();
+    }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent servletContextEvent) {
+
     }
 
 }
