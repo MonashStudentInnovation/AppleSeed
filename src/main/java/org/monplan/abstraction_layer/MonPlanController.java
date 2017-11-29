@@ -64,6 +64,14 @@ public class MonPlanController<T extends DataModel> {
             results = service.getAll();
         } else {
             // search by codes
+            /*
+                FIXME: Paginate at database level, and only do it if it is necessary
+                Pagination should be done using limit and offset methods.
+                Furthermore, we should only support fetching by codes and
+                not by names. Finally, pagination is not necessary if codes
+                have been specified (can set a maximum limit to prevent fetching
+                too many unit codes if necessary).
+             */
             Set<String> seenIds = new HashSet<>();
             if (codes != null) {
                 // for each given code, find the matches for that
