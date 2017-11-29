@@ -127,10 +127,13 @@ public class MonPlanService<T extends DataModel> {
         }
 
         if (!allowDuplicateCodes && modelInstance.fetchCode() != null) {
-            if (this.repository.getByCode(modelInstance.fetchCode()).size() > 0) {
-                // Check if a model instance already has this code already exists in data layer.
-                throw new FailedOperationException(String.format(
-                        "CREATE operation failed: code %s is already in use.", modelInstance.fetchCode()));
+            List<T> modelsWithCode = this.repository.getByCode(modelInstance.fetchCode());
+            if (modelsWithCode.size() > 0) {
+                // check if there is a different model with this code already
+                if (!modelsWithCode.get(0).getId().equals(modelInstance.getId())) {
+                    throw new FailedOperationException(String.format(
+                            "UPDATE operation failed: code %s is already in use.", modelInstance.fetchCode()));
+                }
             }
         }
 
