@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <!-- [START]: CONFIGURATION Your Application Here-->
+        <!-- [START]: CONFIGURATION Your edu.monash.monplan.Application Here-->
         <appId>monplan-api-au</appId> <!-- CHANGE appID to appID-->
         <environmentID>prod</environmentID>
         <appVersion>1</appVersion>
