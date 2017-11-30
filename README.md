@@ -77,8 +77,8 @@ If successful your output will look something like this
 [INFO]  =========|_|==============|___/=/_/_/_/
 [INFO]  :: Spring Boot ::        (v1.5.3.RELEASE)
 [INFO] 
-[INFO] 2017-11-16 22:44:47.351  INFO 32609 --- [           main] edu.monash.monplan.ServletInitializer    : Starting ServletInitializer on dyn-118-138-38-175.its.monash.edu.au with PID 32609 (/Users/David/Desktop/monPlan-repos/local/AppleSeed/target/springboot-base-gae-java8-1.0-SNAPSHOT/WEB-INF/lib/springboot-base-gae-java8-1.0-SNAPSHOT.jar started by David in /Users/David/Desktop/monPlan-repos/local/AppleSeed/target/springboot-base-gae-java8-1.0-SNAPSHOT)
-[INFO] 2017-11-16 22:44:47.378  INFO 32609 --- [           main] edu.monash.monplan.ServletInitializer    : No active profile set, falling back to default profiles: default
+[INFO] 2017-11-16 22:44:47.351  INFO 32609 --- [           main] edu.monash.monplan.edu.monash.monplan.ServletInitializer    : Starting edu.monash.monplan.ServletInitializer on dyn-118-138-38-175.its.monash.edu.au with PID 32609 (/Users/David/Desktop/monPlan-repos/local/AppleSeed/target/springboot-base-gae-java8-1.0-SNAPSHOT/WEB-INF/lib/springboot-base-gae-java8-1.0-SNAPSHOT.jar started by David in /Users/David/Desktop/monPlan-repos/local/AppleSeed/target/springboot-base-gae-java8-1.0-SNAPSHOT)
+[INFO] 2017-11-16 22:44:47.378  INFO 32609 --- [           main] edu.monash.monplan.edu.monash.monplan.ServletInitializer    : No active profile set, falling back to default profiles: default
 [INFO] 2017-11-16 22:44:47.540  INFO 32609 --- [           main] ationConfigEmbeddedWebApplicationContext : Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@39a2bb97: startup date [Thu Nov 16 22:44:47 UTC 2017]; root of context hierarchy
 ....
 [INFO] Using default security password: 3c94bb67-bd2e-41b2-9fe8-9c3d8c86ed54

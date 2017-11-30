@@ -59,8 +59,8 @@ You will neded to edit `pom.xml`
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <!-- [START]: CONFIGURATION Your Application Here-->
-        <appId>david-app</appId> <!-- CHANGE appID to appID-->
+        edu.monash.monplan.Application
+  edu.monash.monplan.Applicationd>david-app</appId> <!-- CHANGE appID to appID-->
         <environmentID>prod</environmentID>
         <appVersion>1</appVersion>
 
@@ -416,7 +416,7 @@ public class MonPlanController<T extends DataModel> {
 Since we have these methods we just call them in `DavidController` along with providing the path for the API endpoint and the HTTP methods allowed.
 
 # Building and Deploying a Single Paged Web Application
-The framework can also be used to build and deploying a Single paged web application, such SPWAs can include a _production build of a ReactJS_ application.
+The framewedu.monash.monplan.Applicationo be used to build and deploying a Single paged web application, such SPWAs can include a _production build of a ReactJS_ application.
 
 ?> This step is really important as if you are using **Declarative Routing** such as [_react-router_](https://github.com/ReactTraining/react-router)
 
