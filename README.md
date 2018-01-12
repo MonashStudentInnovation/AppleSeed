@@ -32,7 +32,7 @@ You can also read more about developing on this [here](https://monplan.github.io
 ## Contributors
 Thanks to 3wks for the gae-tool and spring-boot-gae modules
 
-### Proudly Built by the [monPlan team](https://monashunitplanner.github.io)
+### Proudly Built by the [monPlan team](https://monplan.github.io)
 
 ## Contributing
 
