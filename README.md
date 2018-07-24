@@ -27,7 +27,7 @@ Our Applet or App (APP-le, get it?) is the foundation of our code, it is designe
 # Introduction
 This is the base for the API which is built on AppEngine Standard with Java 8 using SpringBoot.
 
-You can also read more about developing on this [here](https://monplan.github.io/AppleSeed/#/) or jump to the [quick start](#quick-start) section
+You can also read more about developing on this [here](https://monashstudentinnovation.github.io/AppleSeed) or jump to the [quick start](#quick-start) section
 
 ## Contributors
 Thanks to 3wks for the gae-tool and spring-boot-gae modules
