@@ -59,8 +59,7 @@ You will neded to edit `pom.xml`
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        edu.monash.monplan.Application
-  edu.monash.monplan.Applicationd>david-app</appId> <!-- CHANGE appID to appID-->
+        <appId>david-app</appId> <!-- CHANGE appID to appID-->
         <environmentID>prod</environmentID>
         <appVersion>1</appVersion>
 
