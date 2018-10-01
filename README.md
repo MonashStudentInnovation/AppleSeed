@@ -16,16 +16,13 @@
 
 **Latest Pre-Release**: [![GitHub (pre-)release](https://img.shields.io/github/release/monPlan/AppleSeed/all.svg)](https://github.com/monPlan/AppleSeed/releases)
 
-**Current Build Status**: ![status](https://circleci.com/gh/monPlan/springboot-base-gae-java8.png?circle-token=:circle-token)
-
 # Why AppleSeed as the name?
 
 Our Applet or App (APP-le, get it?) is the foundation of our code, it is designed around SpringBoot. We believe in letting you code on this framework will be awesome! :seedling: Seeds grow into a huge tree during the Spring :evergreen_tree:. 
 
 
-
 # Introduction
-This is the base for the API which is built on AppEngine Standard with Java 8 using SpringBoot.
+This is the base for the API which is built on Google App Engine Standard with Java 8 using the SpringBoot Framework.
 
 You can also read more about developing on this [here](https://monashstudentinnovation.github.io/AppleSeed) or jump to the [quick start](#quick-start) section
 
